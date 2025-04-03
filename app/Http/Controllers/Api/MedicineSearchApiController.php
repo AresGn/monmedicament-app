@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Patient;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Medicine;
@@ -9,25 +9,17 @@ use App\Models\PharmacyInventory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class MedicineSearchController extends Controller
+class MedicineSearchApiController extends Controller
 {
     /**
-     * Display the search form
-     */
-    public function index()
-    {
-        return view('patient.search.index');
-    }
-
-    /**
-     * Search for medicines
+     * Search for medicines and return JSON response
      */
     public function search(Request $request)
     {
-        // Si aucune requête n'est fournie, afficher une page de résultats vide
+        // If no query is provided, return empty results
         if (!$request->has('query') || empty($request->input('query'))) {
-            return view('patient.search.results', [
-                'pharmacies' => collect(),
+            return response()->json([
+                'pharmacies' => [],
                 'query' => '',
             ]);
         }
@@ -80,39 +72,13 @@ class MedicineSearchController extends Controller
                         'quantity' => $item->quantity_available,
                         'price' => $item->price,
                     ];
-                }),
+                })->values()->all(),
             ];
-        });
+        })->values()->all();
 
-        return view('patient.search.results', [
+        return response()->json([
             'pharmacies' => $pharmacies,
             'query' => $query,
-        ]);
-    }
-
-    /**
-     * Display pharmacy details
-     */
-    public function pharmacyDetails($id)
-    {
-        $pharmacy = Pharmacy::with(['inventory.medicine'])->findOrFail($id);
-        
-        return view('patient.search.pharmacy_details', [
-            'pharmacy' => $pharmacy,
-        ]);
-    }
-
-    /**
-     * Display list of all pharmacies
-     */
-    public function pharmacyList()
-    {
-        $pharmacies = Pharmacy::orderBy('name')
-            ->withCount('inventory')
-            ->paginate(12);
-        
-        return view('patient.search.pharmacy_list', [
-            'pharmacies' => $pharmacies,
         ]);
     }
 } 

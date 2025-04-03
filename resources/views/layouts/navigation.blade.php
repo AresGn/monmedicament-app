@@ -13,7 +13,7 @@
                 @auth
                     @if(Auth::user()->user_type === 'PATIENT')
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('patient.search.*') ? 'active' : '' }}" href="{{ route('patient.search.index') }}">
+                            <a class="nav-link {{ request()->routeIs('patient.search.*') ? 'active' : '' }}" href="#">
                                 <i class="fas fa-search d-inline d-md-none me-2"></i>Rechercher
                             </a>
                         </li>
@@ -41,7 +41,7 @@
                     @endif
                 @else
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('patient.search.*') ? 'active' : '' }}" href="{{ route('patient.search.index') }}">
+                        <a class="nav-link {{ request()->routeIs('patient.search.*') ? 'active' : '' }}" href="#">
                             <i class="fas fa-search d-inline d-md-none me-2"></i>Rechercher
                         </a>
                     </li>

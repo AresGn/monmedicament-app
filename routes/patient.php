@@ -53,8 +53,10 @@ Route::get('/privacy', function () {
 })->name('privacy');
 
 // Medicine search routes (no authentication required)
-Route::get('/patient/search', [MedicineSearchController::class, 'index'])->name('patient.search.index');
+Route::get('/patient/search', [MedicineSearchController::class, 'search'])->name('patient.search.results');
 Route::post('/patient/search', [MedicineSearchController::class, 'search'])->name('patient.search.results');
+Route::get('/patient/pharmacies', [MedicineSearchController::class, 'pharmacyList'])->name('patient.search.pharmacy.list');
+Route::get('/patient/pharmacy/details/{id}', [MedicineSearchController::class, 'pharmacyDetails'])->name('patient.search.pharmacy.details');
 Route::get('/patient/pharmacy/{id}', [MedicineSearchController::class, 'pharmacyDetails'])->name('patient.search.pharmacy');
 
 // Routes requiring patient authentication

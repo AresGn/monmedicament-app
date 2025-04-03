@@ -389,7 +389,7 @@
             <h3>Liens Rapides</h3>
             <ul>
                 <li><a href="{{ route('patient.home') }}">Accueil</a></li>
-                <li><a href="{{ route('patient.search.index') }}">Recherche</a></li>
+                <li><a href="#">Recherche</a></li>
                 <li><a href="{{ route('patient.search.pharmacy.list') }}">Pharmacies</a></li>
                 <li><a href="#faq">FAQ</a></li>
             </ul>
