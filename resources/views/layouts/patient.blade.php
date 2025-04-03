@@ -2,7 +2,14 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="MonMédicament - Trouvez facilement vos médicaments dans les pharmacies proches de vous">
+    <meta name="theme-color" content="#007BFF">
+    
+    <!-- PWA Capability -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    
     <title>{{ config('app.name') }} - @yield('title')</title>
     
     <!-- Fonts -->
@@ -34,12 +41,20 @@
 
         body {
             background-color: var(--neutral);
+            font-size: 16px;
+            line-height: 1.5;
+            overflow-x: hidden;
         }
 
+        /* Mobile-first header */
         header {
             background: var(--white);
-            padding: 1rem 2rem;
+            padding: 0.75rem 1rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -47,15 +62,65 @@
 
         .logo {
             color: var(--primary);
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 600;
             text-decoration: none;
+            z-index: 2;
+        }
+
+        /* Mobile navigation */
+        .mobile-menu-toggle {
+            display: block;
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            height: 100vh;
+            background: var(--white);
+            z-index: 10;
+            transition: left 0.3s ease;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            padding-top: 4rem;
+        }
+
+        nav.active {
+            left: 0;
+        }
+
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9;
+            display: none;
+        }
+
+        .nav-overlay.active {
+            display: block;
         }
 
         nav ul {
             display: flex;
-            gap: 2rem;
+            flex-direction: column;
+            gap: 0;
             list-style: none;
+        }
+
+        nav li {
+            width: 100%;
+            border-bottom: 1px solid #eee;
         }
 
         nav a {
@@ -63,35 +128,43 @@
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
+            display: block;
+            padding: 1rem 1.5rem;
         }
 
         nav a:hover {
             color: var(--primary);
+            background-color: #f5f5f5;
         }
 
         .header-buttons {
             display: flex;
-            gap: 1rem;
-            align-items: center;
+            flex-direction: column;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 1rem 1.5rem;
         }
 
         .btn {
-            padding: 0.5rem 1.5rem;
-            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s;
+            text-align: center;
+            display: block;
+            border: none;
+            cursor: pointer;
         }
 
         .btn-demo {
             background: var(--white);
             color: var(--primary);
-            border: 2px solid var(--primary);
+            border: 1px solid var(--primary);
         }
 
         .btn-demo:hover {
-            background: var(--primary);
-            color: var(--white);
+            background: rgba(0, 123, 255, 0.1);
         }
 
         .btn-login {
@@ -103,25 +176,38 @@
             background: #0056b3;
         }
 
+        /* Main content */
+        main {
+            padding: 1rem;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        /* Mobile-first footer */
         footer {
             background: var(--primary);
-            padding: 3rem 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            padding: 2rem 1rem;
             color: var(--white);
+        }
+
+        .footer-section {
+            margin-bottom: 1.5rem;
         }
 
         footer h2, footer h3 {
             color: var(--white);
             margin-bottom: 1rem;
             font-weight: 600;
+            font-size: 1.25rem;
         }
 
         footer p {
             color: var(--neutral);
             margin-bottom: 0.5rem;
             opacity: 0.9;
+            font-size: 0.9rem;
         }
 
         footer ul {
@@ -135,6 +221,7 @@
             display: block;
             margin-bottom: 0.5rem;
             opacity: 0.9;
+            font-size: 0.9rem;
         }
 
         footer a:hover {
@@ -142,26 +229,67 @@
             opacity: 1;
         }
 
-        @media (max-width: 768px) {
+        /* Media queries for larger screens */
+        @media (min-width: 768px) {
             header {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
+                padding: 1rem 2rem;
             }
-
+            
+            .mobile-menu-toggle {
+                display: none;
+            }
+            
+            nav {
+                position: static;
+                width: auto;
+                height: auto;
+                background: transparent;
+                box-shadow: none;
+                padding-top: 0;
+                left: 0;
+            }
+            
             nav ul {
-                flex-direction: column;
-                gap: 0.5rem;
+                flex-direction: row;
+                gap: 2rem;
             }
-
+            
+            nav li {
+                width: auto;
+                border-bottom: none;
+            }
+            
+            nav a {
+                padding: 0;
+            }
+            
+            nav a:hover {
+                background-color: transparent;
+            }
+            
             .header-buttons {
-                flex-direction: column;
-                width: 100%;
+                flex-direction: row;
+                width: auto;
+                padding: 0;
             }
-
+            
             .btn {
-                width: 100%;
-                text-align: center;
+                padding: 0.5rem 1.5rem;
+            }
+            
+            main {
+                padding: 2rem;
+            }
+            
+            footer {
+                padding: 3rem 2rem;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 2rem;
+            }
+            
+            .footer-section {
+                margin-bottom: 0;
             }
         }
     </style>
@@ -170,30 +298,37 @@
 </head>
 <body>
     <header>
-        <a href="{{ route('patient.home') }}" class="logo">MonMedicament</a>
-        <nav>
+        <div class="header-container">
+            <a href="{{ route('patient.home') }}" class="logo">MonMedicament</a>
+            <button class="mobile-menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <div class="nav-overlay" id="nav-overlay"></div>
+        <nav id="mobile-nav">
             <ul>
                 <li><a href="#how-it-works">Comment ça marche</a></li>
                 <li><a href="{{ route('patient.search.pharmacy.list') }}">Pharmacies</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-        </nav>
-        <div class="header-buttons">
-            <a href="#demo" class="btn btn-demo">Voir une démo</a>
-            @auth
-                @if(Auth::user()->user_type === 'PATIENT')
-                    <a href="{{ route('patient.dashboard') }}" class="btn btn-login">Mon compte</a>
-                    <form action="{{ route('patient.auth.logout') }}" method="POST" style="display: inline;">
-                        @csrf
-                        <button type="submit" class="btn btn-demo">Déconnexion</button>
-                    </form>
+            <div class="header-buttons">
+                <a href="#demo" class="btn btn-demo">Voir une démo</a>
+                @auth
+                    @if(Auth::user()->user_type === 'PATIENT')
+                        <a href="{{ route('patient.dashboard') }}" class="btn btn-login">Mon compte</a>
+                        <form action="{{ route('patient.auth.logout') }}" method="POST" style="width: 100%;">
+                            @csrf
+                            <button type="submit" class="btn btn-demo" style="width: 100%;">Déconnexion</button>
+                        </form>
+                    @else
+                        <a href="{{ route('patient.auth.login') }}" class="btn btn-login">Se connecter</a>
+                    @endif
                 @else
                     <a href="{{ route('patient.auth.login') }}" class="btn btn-login">Se connecter</a>
-                @endif
-            @else
-                <a href="{{ route('patient.auth.login') }}" class="btn btn-login">Se connecter</a>
-            @endauth
-        </div>
+                @endauth
+            </div>
+        </nav>
     </header>
 
     <main>
@@ -229,6 +364,37 @@
             <p>Réseaux sociaux: MonMedicament</p>
         </div>
     </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileNav = document.getElementById('mobile-nav');
+            const navOverlay = document.getElementById('nav-overlay');
+            
+            menuToggle.addEventListener('click', function() {
+                mobileNav.classList.toggle('active');
+                navOverlay.classList.toggle('active');
+                document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+            });
+            
+            navOverlay.addEventListener('click', function() {
+                mobileNav.classList.remove('active');
+                navOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            // Close menu when clicking on a link
+            const navLinks = mobileNav.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileNav.classList.remove('active');
+                    navOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        });
+    </script>
 
     @stack('scripts')
 </body>
