@@ -1,80 +1,219 @@
-@extends('layouts.app')
+@extends('layouts.patient')
 
 @section('title', 'Rechercher un médicament')
 
-@section('header')
-    <h1 class="text-xl font-semibold text-gray-800">
-        Rechercher un médicament
-    </h1>
-@endsection
+@push('styles')
+<style>
+    /* Mobile-first styles */
+    .search-container {
+        padding: 1rem;
+        background-color: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1.5rem;
+    }
+    
+    .search-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    
+    .search-description {
+        font-size: 0.9rem;
+        color: #666;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        line-height: 1.4;
+    }
+    
+    .search-form {
+        width: 100%;
+        margin-bottom: 1.5rem;
+    }
+    
+    .search-input-container {
+        position: relative;
+        margin-bottom: 1rem;
+    }
+    
+    .search-input {
+        width: 100%;
+        padding: 0.75rem 3rem 0.75rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 0.5rem;
+        font-size: 0.9rem;
+        outline: none;
+        transition: all 0.3s;
+    }
+    
+    .search-input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+    }
+    
+    .search-button {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        padding: 0 1rem;
+        background: transparent;
+        border: none;
+        color: var(--primary);
+        cursor: pointer;
+    }
+    
+    .error-message {
+        color: var(--error);
+        font-size: 0.8rem;
+        margin-top: 0.5rem;
+    }
+    
+    .alternate-option {
+        text-align: center;
+        margin: 1rem 0;
+    }
+    
+    .alternate-option p {
+        font-size: 0.85rem;
+        color: #777;
+        margin-bottom: 0.5rem;
+    }
+    
+    .scan-button {
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--primary);
+        background: transparent;
+        color: var(--primary);
+        border-radius: 0.5rem;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        opacity: 0.7;
+    }
+    
+    .scan-button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+    
+    .scan-button i {
+        margin-right: 0.5rem;
+    }
+    
+    .scan-badge {
+        font-size: 0.7rem;
+        margin-left: 0.5rem;
+    }
+    
+    .popular-searches {
+        margin-top: 2rem;
+    }
+    
+    .popular-searches h2 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #333;
+    }
+    
+    .search-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .search-tag {
+        padding: 0.5rem 0.75rem;
+        background-color: #f1f1f1;
+        color: #444;
+        border-radius: 2rem;
+        font-size: 0.8rem;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+    
+    .search-tag:hover {
+        background-color: #e0e0e0;
+    }
+    
+    /* Tablet and desktop styles */
+    @media (min-width: 768px) {
+        .search-container {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .search-title {
+            font-size: 1.5rem;
+        }
+        
+        .search-description {
+            font-size: 1rem;
+        }
+        
+        .search-input {
+            padding: 1rem 3rem 1rem 1.25rem;
+            font-size: 1rem;
+        }
+        
+        .search-tag {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+    }
+</style>
+@endpush
 
 @section('content')
-    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6">
-            <div class="flex flex-col items-center">
-                <div class="w-full md:w-2/3 lg:w-1/2 mb-8">
-                    <p class="text-gray-600 text-center mb-6">
-                        Entrez le nom du médicament dont vous avez besoin pour trouver les pharmacies où il est disponible.
-                    </p>
-                    
-                    <form action="{{ route('patient.search.results') }}" method="POST" class="w-full">
-                        @csrf
-                        <div class="mb-4">
-                            <div class="relative">
-                                <input type="text" 
-                                       name="query" 
-                                       id="query" 
-                                       class="w-full pl-4 pr-10 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                       placeholder="Exemple: Paracétamol, Amoxicilline..."
-                                       required>
-                                <button type="submit" class="absolute inset-y-0 right-0 flex items-center px-4 text-blue-600 bg-transparent">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                            @error('query')
-                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </form>
-                    
-                    <!-- Future feature: Upload prescription image -->
-                    <div class="mt-4 text-center">
-                        <p class="text-sm text-gray-500">ou</p>
-                        <button class="mt-2 px-4 py-2 border border-blue-300 text-blue-600 rounded-lg hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:opacity-50" disabled>
-                            <i class="fas fa-camera mr-2"></i> Scanner une ordonnance
-                            <span class="text-xs ml-2">(Bientôt disponible)</span>
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="w-full">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Recherches populaires</h2>
-                    <div class="flex flex-wrap gap-2">
-                        <a href="{{ route('patient.search.results') }}?query=paracetamol" 
-                           class="px-4 py-2 bg-gray-100 text-gray-800 rounded-full hover:bg-gray-200">
-                            Paracétamol
-                        </a>
-                        <a href="{{ route('patient.search.results') }}?query=ibuprofene" 
-                           class="px-4 py-2 bg-gray-100 text-gray-800 rounded-full hover:bg-gray-200">
-                            Ibuprofène
-                        </a>
-                        <a href="{{ route('patient.search.results') }}?query=amoxicilline" 
-                           class="px-4 py-2 bg-gray-100 text-gray-800 rounded-full hover:bg-gray-200">
-                            Amoxicilline
-                        </a>
-                        <a href="{{ route('patient.search.results') }}?query=doliprane" 
-                           class="px-4 py-2 bg-gray-100 text-gray-800 rounded-full hover:bg-gray-200">
-                            Doliprane
-                        </a>
-                        <a href="{{ route('patient.search.results') }}?query=vitamine" 
-                           class="px-4 py-2 bg-gray-100 text-gray-800 rounded-full hover:bg-gray-200">
-                            Vitamines
-                        </a>
-                    </div>
-                </div>
-            </div>
+<div class="search-container">
+    <h1 class="search-title">Rechercher un médicament</h1>
+    
+    <p class="search-description">
+        Entrez le nom du médicament dont vous avez besoin pour trouver les pharmacies où il est disponible.
+    </p>
+    
+    <form action="{{ route('patient.search.results') }}" method="GET" class="search-form">
+        <div class="search-input-container">
+            <input type="text" 
+                   name="query" 
+                   id="query" 
+                   class="search-input"
+                   placeholder="Exemple: Paracétamol, Amoxicilline..."
+                   required>
+            <button type="submit" class="search-button">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        @error('query')
+            <p class="error-message">{{ $message }}</p>
+        @enderror
+    </form>
+    
+    <!-- Future feature: Upload prescription image -->
+    <div class="alternate-option">
+        <p>ou</p>
+        <button class="scan-button" disabled>
+            <i class="fas fa-camera"></i> Scanner une ordonnance
+            <span class="scan-badge">(Bientôt disponible)</span>
+        </button>
+    </div>
+    
+    <div class="popular-searches">
+        <h2>Recherches populaires</h2>
+        <div class="search-tags">
+            <a href="{{ route('patient.search.results') }}?query=paracetamol" class="search-tag">Paracétamol</a>
+            <a href="{{ route('patient.search.results') }}?query=ibuprofene" class="search-tag">Ibuprofène</a>
+            <a href="{{ route('patient.search.results') }}?query=amoxicilline" class="search-tag">Amoxicilline</a>
+            <a href="{{ route('patient.search.results') }}?query=doliprane" class="search-tag">Doliprane</a>
+            <a href="{{ route('patient.search.results') }}?query=vitamine" class="search-tag">Vitamines</a>
         </div>
     </div>
+</div>
 @endsection
 
 @section('scripts')

@@ -68,6 +68,11 @@
             z-index: 2;
         }
 
+        .logo:hover {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
         /* Mobile navigation */
         .mobile-menu-toggle {
             display: block;
@@ -165,6 +170,8 @@
 
         .btn-demo:hover {
             background: rgba(0, 123, 255, 0.1);
+            color: var(--primary);
+            text-decoration: none;
         }
 
         .btn-login {
@@ -174,6 +181,8 @@
 
         .btn-login:hover {
             background: #0056b3;
+            color: var(--white);
+            text-decoration: none;
         }
 
         /* Main content */
@@ -232,7 +241,15 @@
         /* Media queries for larger screens */
         @media (min-width: 768px) {
             header {
-                padding: 1rem 2rem;
+                padding: 0.75rem 2rem;
+            }
+            
+            .header-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                max-width: 1200px;
+                margin: 0 auto;
             }
             
             .mobile-menu-toggle {
@@ -247,11 +264,15 @@
                 box-shadow: none;
                 padding-top: 0;
                 left: 0;
+                display: flex;
+                align-items: center;
             }
             
             nav ul {
                 flex-direction: row;
-                gap: 2rem;
+                gap: 1.5rem;
+                margin-bottom: 0;
+                padding-left: 0;
             }
             
             nav li {
@@ -261,20 +282,25 @@
             
             nav a {
                 padding: 0;
+                color: #444;
             }
             
             nav a:hover {
                 background-color: transparent;
+                color: var(--primary);
             }
             
             .header-buttons {
                 flex-direction: row;
                 width: auto;
                 padding: 0;
+                gap: 0.75rem;
+                margin-left: 1.5rem;
             }
             
             .btn {
-                padding: 0.5rem 1.5rem;
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
             }
             
             main {
@@ -292,6 +318,25 @@
                 margin-bottom: 0;
             }
         }
+
+        @media (min-width: 992px) {
+            header {
+                padding: 0.75rem 3rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            nav ul {
+                gap: 2rem;
+            }
+
+            .btn {
+                padding: 0.5rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
     </style>
 
     @stack('styles')
@@ -303,32 +348,32 @@
             <button class="mobile-menu-toggle" id="menu-toggle">
                 <i class="fas fa-bars"></i>
             </button>
-        </div>
-        
-        <div class="nav-overlay" id="nav-overlay"></div>
-        <nav id="mobile-nav">
-            <ul>
-                <li><a href="#how-it-works">Comment ça marche</a></li>
-                <li><a href="{{ route('patient.search.pharmacy.list') }}">Pharmacies</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="header-buttons">
-                <a href="#demo" class="btn btn-demo">Voir une démo</a>
-                @auth
-                    @if(Auth::user()->user_type === 'PATIENT')
-                        <a href="{{ route('patient.dashboard') }}" class="btn btn-login">Mon compte</a>
-                        <form action="{{ route('patient.auth.logout') }}" method="POST" style="width: 100%;">
-                            @csrf
-                            <button type="submit" class="btn btn-demo" style="width: 100%;">Déconnexion</button>
-                        </form>
+            
+            <div class="nav-overlay" id="nav-overlay"></div>
+            <nav id="mobile-nav">
+                <ul>
+                    <li><a href="#how-it-works">Comment ça marche</a></li>
+                    <li><a href="{{ route('patient.search.pharmacy.list') }}">Pharmacies</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="header-buttons">
+                    <a href="#demo" class="btn btn-demo">Voir une démo</a>
+                    @auth
+                        @if(Auth::user()->user_type === 'PATIENT')
+                            <a href="{{ route('patient.dashboard') }}" class="btn btn-login">Mon compte</a>
+                            <form action="{{ route('patient.auth.logout') }}" method="POST" style="width: 100%;">
+                                @csrf
+                                <button type="submit" class="btn btn-demo" style="width: 100%;">Déconnexion</button>
+                            </form>
+                        @else
+                            <a href="{{ route('patient.auth.login') }}" class="btn btn-login">Se connecter</a>
+                        @endif
                     @else
                         <a href="{{ route('patient.auth.login') }}" class="btn btn-login">Se connecter</a>
-                    @endif
-                @else
-                    <a href="{{ route('patient.auth.login') }}" class="btn btn-login">Se connecter</a>
-                @endauth
-            </div>
-        </nav>
+                    @endauth
+                </div>
+            </nav>
+        </div>
     </header>
 
     <main>

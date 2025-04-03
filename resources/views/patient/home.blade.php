@@ -4,58 +4,67 @@
 
 @push('styles')
 <style>
+    /* Styles mobile-first */
     .hero {
         background: linear-gradient(135deg, #0D9488 0%, #0EA5E9 100%);
         color: var(--white);
         text-align: center;
-        padding: 4rem 2rem;
+        padding: 2rem 1rem;
     }
 
     .hero h1 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+        font-weight: 700;
     }
 
     .hero p {
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
         opacity: 0.9;
+        line-height: 1.4;
     }
 
     .search-bar {
-        max-width: 1000px;
+        width: 100%;
         margin: 0 auto;
     }
 
     .search-options {
         display: flex;
         flex-direction: column;
-        gap: 2rem;
+        gap: 1rem;
         width: 100%;
     }
 
     .search-input-container {
         display: flex;
         width: 100%;
-        gap: 1rem;
+        gap: 0.5rem;
     }
 
     .search-input-container input {
         flex-grow: 1;
-        padding: 1rem;
+        padding: 0.75rem;
         border: none;
-        border-radius: 0.5rem;
-        font-size: 1rem;
+        border-radius: 0.25rem;
+        font-size: 0.9rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     .search-button {
         background: var(--secondary);
         color: var(--white);
         border: none;
-        border-radius: 0.5rem;
-        padding: 0 2rem;
+        border-radius: 0.25rem;
+        padding: 0 1rem;
         cursor: pointer;
         transition: background-color 0.3s;
+        min-width: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
     }
 
     .search-button:hover {
@@ -70,13 +79,14 @@
 
     .search-divider span {
         display: inline-block;
-        padding: 0 1rem;
+        padding: 0 0.75rem;
         background: var(--primary);
         color: white;
         font-weight: bold;
         position: relative;
         z-index: 1;
         border-radius: 20px;
+        font-size: 0.8rem;
     }
 
     .search-divider:before {
@@ -91,21 +101,21 @@
 
     .ordonnance-upload {
         background: white;
-        border-radius: 0.5rem;
-        padding: 1.5rem;
+        border-radius: 0.25rem;
+        padding: 1rem;
     }
 
     .ordonnance-upload h3 {
         color: var(--primary);
-        margin-bottom: 1rem;
-        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+        font-size: 1.2rem;
         text-align: left;
     }
 
     .drop-area {
         border: 2px dashed #ddd;
-        border-radius: 0.5rem;
-        padding: 2rem;
+        border-radius: 0.25rem;
+        padding: 1.5rem 1rem;
         text-align: center;
         position: relative;
         transition: all 0.3s;
@@ -118,35 +128,39 @@
     }
 
     .drop-icon {
-        margin-bottom: 1rem;
+        margin-bottom: 0.75rem;
     }
 
     .drop-icon i {
-        font-size: 2.5rem;
+        font-size: 2rem;
         color: #666;
     }
 
     .drop-area p {
-        margin-bottom: 1rem;
+        margin-bottom: 0.75rem;
         color: #666;
+        font-size: 0.9rem;
     }
 
     .upload-buttons {
         display: flex;
-        justify-content: center;
-        gap: 1rem;
+        flex-direction: column;
+        gap: 0.75rem;
         margin: 1rem 0;
     }
 
     .upload-btn {
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 0.5rem;
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.5rem;
+        padding: 0.75rem 1rem;
+        border-radius: 0.25rem;
         cursor: pointer;
         transition: all 0.3s;
         font-weight: 600;
+        font-size: 0.9rem;
+        width: 100%;
     }
 
     .upload-btn:first-child {
@@ -165,9 +179,9 @@
     }
 
     .file-formats {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         color: #888;
-        margin-top: 1rem;
+        margin-top: 0.75rem;
     }
 
     .file-info {
@@ -175,10 +189,11 @@
         align-items: center;
         justify-content: space-between;
         background: #e6f7ff;
-        padding: 0.75rem 1rem;
-        border-radius: 0.5rem;
-        margin: 1rem 0;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.25rem;
+        margin: 0.75rem 0;
         border: 1px solid #0EA5E9;
+        font-size: 0.85rem;
     }
 
     .file-info p {
@@ -198,16 +213,86 @@
         border: none;
         color: #ff4d4f;
         cursor: pointer;
-        padding: 0.25rem;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.2s;
     }
 
-    .remove-file:hover {
-        background: #ffefef;
+    /* Tablet and Desktop styles */
+    @media (min-width: 768px) {
+        .hero {
+            padding: 4rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-bar {
+            max-width: 800px;
+        }
+
+        .search-options {
+            gap: 2rem;
+        }
+
+        .search-input-container {
+            gap: 1rem;
+        }
+
+        .search-input-container input {
+            padding: 1rem;
+            font-size: 1rem;
+        }
+
+        .search-button {
+            padding: 0 2rem;
+        }
+
+        .ordonnance-upload {
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+        }
+
+        .ordonnance-upload h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .drop-area {
+            padding: 2rem;
+            border-radius: 0.5rem;
+        }
+
+        .drop-icon i {
+            font-size: 2.5rem;
+        }
+
+        .drop-area p {
+            font-size: 1rem;
+        }
+
+        .upload-buttons {
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        .upload-btn {
+            width: auto;
+            padding: 0.75rem 1.5rem;
+        }
+
+        .file-formats {
+            font-size: 0.8rem;
+        }
+
+        .file-info {
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+        }
     }
 
     .how-it-works {

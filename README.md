@@ -82,6 +82,35 @@ Les modèles sont partagés entre les deux interfaces et se trouvent dans `app/M
 - Utilisez le français pour les noms de vues, routes et commentaires
 - Utilisez la notation camelCase pour les variables et méthodes
 - Utilisez la notation PascalCase pour les classes et modèles
+- Adoptez une approche mobile-first pour toutes les interfaces utilisateur
+
+## Approche Mobile-First et PWA
+
+MonMedicament adopte une approche "mobile-first" pour le développement de ses interfaces, en raison des habitudes d'utilisation de notre audience cible qui accède majoritairement à l'application via des appareils mobiles.
+
+### Principes à suivre
+
+- Concevez d'abord pour les appareils mobiles, puis adaptez pour les écrans plus grands
+- Utilisez des media queries pour améliorer l'expérience sur les grands écrans, et non l'inverse
+- Optimisez les performances pour des connexions Internet variables
+- Assurez-vous que tous les éléments interactifs sont facilement utilisables au toucher (taille minimale de 44x44px)
+- Testez régulièrement sur de vrais appareils mobiles
+
+### Migration vers une PWA
+
+La conception mobile-first prépare le terrain pour une migration future vers une Progressive Web App (PWA), qui offrira:
+
+- Une expérience utilisateur améliorée (installation sur l'écran d'accueil)
+- Un fonctionnement hors ligne pour les fonctionnalités essentielles
+- Des performances optimisées pour les appareils à faible puissance
+- Des notifications push pour alerter les utilisateurs
+- Une réduction du trafic de données
+
+Lors du développement, gardez à l'esprit cette transition future vers une PWA en:
+- Organisant les assets et les scripts de manière modulaire
+- Implémentant des méta-tags adéquats pour les capacités PWA
+- Optimisant les images et ressources pour le chargement rapide
+- Documentant les fonctionnalités qui nécessiteront une mise en cache pour le mode hors ligne
 
 ## Démarrage de l'application
 
@@ -366,97 +395,3 @@ Inspirons-nous d'une ambiance professionnelle et apaisante, en utilisant des ton
 
 ---
 
-
--- Table des utilisateurs
-CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL,
-    phone_number VARCHAR(20),
-    user_type ENUM('PATIENT', 'PHARMACY', 'ADMIN') NOT NULL,
-    full_name VARCHAR(100) NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    INDEX idx_user_email (email),
-    INDEX idx_user_type (user_type)
-);
-
--- Table des pharmacies
-CREATE TABLE pharmacies (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL UNIQUE,
-    name VARCHAR(100) NOT NULL,
-    address VARCHAR(255) NOT NULL,
-    latitude FLOAT NOT NULL,
-    longitude FLOAT NOT NULL,
-    phone_number VARCHAR(20) NOT NULL,
-    opening_hour TIME NOT NULL,
-    closing_hour TIME NOT NULL,
-    is_open_weekends BOOLEAN DEFAULT FALSE,
-    description TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    INDEX idx_pharmacy_location (latitude, longitude),
-    INDEX idx_pharmacy_name (name)
-);
-
--- Table des médicaments
-CREATE TABLE medicines (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    generic_name VARCHAR(100),
-    manufacturer VARCHAR(100),
-    description TEXT,
-    category ENUM('ANTIBIOTICS', 'PAINKILLERS', 'ANTIVIRALS', 'VITAMINS', 'OTHER') NOT NULL DEFAULT 'OTHER',
-    requires_prescription BOOLEAN DEFAULT FALSE,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    INDEX idx_medicine_name (name),
-    INDEX idx_medicine_generic (generic_name),
-    INDEX idx_medicine_category (category)
-);
-
--- Table d'inventaire des pharmacies
-CREATE TABLE pharmacy_inventory (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    pharmacy_id INT NOT NULL,
-    medicine_id INT NOT NULL,
-    quantity_available INT NOT NULL DEFAULT 0,
-    price DECIMAL(10, 2) NOT NULL,
-    expiry_date DATE,
-    in_stock BOOLEAN DEFAULT TRUE,
-    last_updated DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (pharmacy_id) REFERENCES pharmacies(id) ON DELETE CASCADE,
-    FOREIGN KEY (medicine_id) REFERENCES medicines(id) ON DELETE CASCADE,
-    UNIQUE KEY unique_pharmacy_medicine (pharmacy_id, medicine_id),
-    INDEX idx_inventory_availability (in_stock, quantity_available)
-);
-
--- Table des réservations
-CREATE TABLE reservations (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    pharmacy_id INT NOT NULL,
-    reservation_date DATETIME NOT NULL,
-    status ENUM('PENDING', 'CONFIRMED', 'COMPLETED', 'CANCELLED') NOT NULL DEFAULT 'PENDING',
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (pharmacy_id) REFERENCES pharmacies(id) ON DELETE CASCADE,
-    INDEX idx_reservation_status (status),
-    INDEX idx_reservation_date (reservation_date)
-);
-
--- Table des items de réservation
-CREATE TABLE reservation_items (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    reservation_id INT NOT NULL,
-    medicine_id INT NOT NULL,
-    quantity INT NOT NULL DEFAULT 1,
-    unit_price DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (reservation_id) REFERENCES reservations(id) ON DELETE CASCADE,
-    FOREIGN KEY (medicine_id) REFERENCES medicines(id) ON DELETE RESTRICT,
-    UNIQUE KEY unique_reservation_medicine (reservation_id, medicine_id)
-);
