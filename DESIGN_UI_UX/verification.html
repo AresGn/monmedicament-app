@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vérification - PharmLocator</title>
+    <link rel="stylesheet" href="css/verification.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="progress-bar">
+        <div class="progress-content">
+            <a href="booking.html" class="back-button">
+                <i class="fas fa-chevron-left"></i>
+                <span>Retour</span>
+            </a>
+            <div class="steps">
+                <div class="step completed">
+                    <div class="step-number">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <span>Ordonnance</span>
+                </div>
+                <div class="step-line completed"></div>
+                <div class="step active">
+                    <div class="step-number">2</div>
+                    <span>Vérification</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <span>Confirmation</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="verification-content">
+        <div class="main-grid">
+            <!-- Colonne principale (gauche) -->
+            <div class="main-column">
+                <section class="verification-section">
+                    <h2>Vérification de l'ordonnance</h2>
+                    <div class="success-message">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h3>Ordonnance validée</h3>
+                            <p>Votre ordonnance a été vérifiée et correspond aux médicaments disponibles.</p>
+                        </div>
+                    </div>
+                    <div class="medicines-list">
+                        <div class="medicine-item">
+                            <span>Paracétamol 1000mg</span>
+                            <span class="quantity">2 boîtes</span>
+                        </div>
+                        <div class="medicine-item">
+                            <span>Amoxicilline 500mg</span>
+                            <span class="quantity">1 boîte</span>
+                        </div>
+                        <div class="medicine-item">
+                            <span>Ibuprofène 200mg</span>
+                            <span class="quantity">1 boîte</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="additional-info">
+                    <h2>Instructions supplémentaires</h2>
+                    <textarea placeholder="Instructions supplémentaires pour le pharmacien..."></textarea>
+                </section>
+            </div>
+
+            <!-- Colonne latérale (droite) -->
+            <div class="side-column">
+                <section class="pharmacy-info">
+                    <h2>Pharmacie sélectionnée</h2>
+                    <div class="pharmacy-card">
+                        <div class="pharmacy-image"></div>
+                        <div class="pharmacy-details">
+                            <h3>Pharmacie Centrale</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> 123 Avenue de la République, Paris</p>
+                            <p><i class="fas fa-clock"></i> Ouvert jusqu'à 20h</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="order-summary">
+                    <h2>Récapitulatif de la commande</h2>
+                    <div class="summary-details">
+                        <div class="summary-row">
+                            <span>Sous-total</span>
+                            <span>42.50 €</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Frais de service</span>
+                            <span>2.50 €</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span>45.00 €</span>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="important-note">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <div>
+                        <h3>Note importante</h3>
+                        <p>L'ordonnance originale devra être présentée lors du retrait.</p>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-confirm">Confirmer la commande</button>
+                    <button class="btn-modify">Modifier la commande</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="paymentModal" class="payment-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Réservation de votre commande</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="info-message">
+                    <i class="fas fa-info-circle"></i>
+                    <p>Nous exigeons une réservation pour être sûr que vous allez passer récupérer votre commande pour ne pas que quelqu'un d'autre vienne payer le stock restant.</p>
+                </div>
+
+                <form id="paymentForm" class="payment-form">
+                    <div class="form-group">
+                        <label for="operator">Opérateur Mobile Money</label>
+                        <select id="operator" required>
+                            <option value="">Sélectionnez un opérateur</option>
+                            <option value="mtn">MTN</option>
+                            <option value="moov">MOOV</option>
+                            <option value="celtiis">CELTIIS</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phoneNumber">Numéro de téléphone</label>
+                        <input type="tel" id="phoneNumber" required pattern="[0-9]{8}" placeholder="Ex: 97000000">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fullName">Nom complet</label>
+                        <input type="text" id="fullName" required placeholder="Entrez votre nom complet">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Montant de la réservation (30%)</label>
+                        <input type="text" id="reservationAmount" readonly>
+                    </div>
+
+                    <button type="submit" class="btn-confirm-payment">
+                        <i class="fas fa-lock"></i>
+                        Confirmer ma réservation
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/verification.js"></script>
+</body>
+</html>

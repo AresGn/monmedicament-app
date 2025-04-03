@@ -1,0 +1,278 @@
+:root {
+    --primary: #0D9488;
+    --primary-dark: #0F766E;
+    --gray-50: #F9FAFB;
+    --gray-100: #F3F4F6;
+    --gray-200: #E5E7EB;
+    --gray-600: #4B5563;
+    --gray-700: #374151;
+    --gray-800: #1F2937;
+    --orange-50: #FFF7ED;
+    --orange-500: #F97316;
+    --orange-700: #C2410C;
+    --orange-800: #9A3412;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--gray-50);
+    font-family: system-ui, -apple-system, sans-serif;
+    padding-top: 140px;
+}
+
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-bottom: 1px solid var(--gray-200);
+    z-index: 40;
+    padding: 1rem 0;
+}
+
+.progress-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    color: var(--gray-600);
+    text-decoration: none;
+    margin-bottom: 1rem;
+}
+
+.back-button:hover {
+    color: var(--primary);
+}
+
+.back-button i {
+    margin-right: 0.5rem;
+}
+
+.steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.step-number {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--gray-200);
+    color: var(--gray-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+}
+
+.step.active .step-number {
+    background: var(--primary);
+    color: white;
+}
+
+.step-line {
+    width: 4rem;
+    height: 2px;
+    background: var(--gray-200);
+}
+
+.step-line.active {
+    background: var(--primary);
+}
+
+.booking-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.main-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+section {
+    background: white;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+h2 {
+    font-size: 1.25rem;
+    color: var(--gray-800);
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.upload-zone {
+    border: 2px dashed var(--gray-200);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+.upload-zone.dragover {
+    border-color: var(--primary);
+    background: var(--gray-50);
+}
+
+.upload-zone i {
+    font-size: 3rem;
+    color: var(--gray-600);
+    margin-bottom: 1rem;
+}
+
+.upload-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.btn-upload, .btn-camera {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.btn-upload {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-camera {
+    background: #0EA5E9;
+    color: white;
+}
+
+.upload-info {
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    margin-top: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--gray-700);
+    margin-bottom: 0.5rem;
+}
+
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--gray-200);
+    border-radius: 0.5rem;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.pharmacy-card {
+    display: flex;
+    gap: 1rem;
+}
+
+.pharmacy-image {
+    width: 4rem;
+    height: 4rem;
+    background: var(--gray-100);
+    border-radius: 0.5rem;
+}
+
+.pharmacy-details h3 {
+    margin: 0;
+    color: var(--gray-800);
+}
+
+.pharmacy-details p {
+    margin: 0.25rem 0;
+    font-size: 0.875rem;
+    color: var(--gray-600);
+}
+
+.pharmacy-details i {
+    margin-right: 0.5rem;
+}
+
+.pickup-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.pickup-option {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    border: 1px solid var(--gray-200);
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.pickup-option:hover {
+    border-color: var(--primary);
+}
+
+.important-note {
+    background: var(--orange-50);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.important-note i {
+    color: var(--orange-500);
+}
+
+.important-note h3 {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--orange-800);
+}
+
+.important-note p {
+    margin: 0.25rem 0 0;
+    font-size: 0.875rem;
+    color: var(--orange-700);
+}
+
+.btn-continue {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.btn-continue:hover {
+    background: var(--primary-dark);
+}

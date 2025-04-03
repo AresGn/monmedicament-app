@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réservation - PharmLocator</title>
+    <link rel="stylesheet" href="css/booking.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="progress-bar">
+        <div class="progress-content">
+            <a href="pharmacy-details.html" class="back-button">
+                <i class="fas fa-chevron-left"></i>
+                <span>Retour</span>
+            </a>
+            <div class="steps">
+                <div class="step active">
+                    <div class="step-number">1</div>
+                    <span>Ordonnance</span>
+                </div>
+                <div class="step-line active"></div>
+                <div class="step active">
+                    <div class="step-number">2</div>
+                    <span>Vérification</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <span>Confirmation</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="booking-content">
+        <div class="main-grid">
+            <div class="main-column">
+                <section class="upload-section">
+                    <h2>Votre ordonnance</h2>
+                    <div class="upload-zone" id="dropZone">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Glissez-déposez votre ordonnance ici ou</p>
+                        <div class="upload-buttons">
+                            <button class="btn-upload">
+                                <i class="fas fa-file-upload"></i>
+                                Importer un fichier
+                            </button>
+                            <button class="btn-camera">
+                                <i class="fas fa-camera"></i>
+                                Prendre en photo
+                            </button>
+                        </div>
+                    </div>
+                    <p class="upload-info">Formats acceptés : JPG, PNG, PDF - Max 10MB</p>
+                </section>
+
+                <section class="additional-info">
+                    <h2>Informations complémentaires</h2>
+                    <div class="form-group">
+                        <label>Instructions particulières</label>
+                        <textarea placeholder="Ex: Allergie à certains génériques, préférence de marque..."></textarea>
+                    </div>
+                </section>
+            </div>
+
+            <div class="side-column">
+                <section class="pharmacy-info">
+                    <h2>Pharmacie sélectionnée</h2>
+                    <div class="pharmacy-card">
+                        <div class="pharmacy-image"></div>
+                        <div class="pharmacy-details">
+                            <h3>Pharmacie Centrale</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> 123 Avenue de la République, 75011 Paris</p>
+                            <p><i class="far fa-clock"></i> Retrait possible sous 1h</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="pickup-mode">
+                    <h2>Mode de retrait</h2>
+                    <div class="pickup-options">
+                        <label class="pickup-option">
+                            <input type="radio" name="pickup" value="collect" checked>
+                            <span>Click & Collect (Gratuit)</span>
+                        </label>
+                        <label class="pickup-option">
+                            <input type="radio" name="pickup" value="delivery">
+                            <span>Livraison (+ 4.90€)</span>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Nouvelle section pour la carte de livraison -->
+                <section class="delivery-map-section" style="display: none;">
+                    <h2>Zone de livraison</h2>
+                    <div id="deliveryMap" style="height: 300px; margin-top: 15px;"></div>
+                    <div class="delivery-info">
+                        <div class="estimated-time">
+                            <i class="fas fa-clock"></i>
+                            <span id="estimatedTime">--:--</span>
+                        </div>
+                        <div class="delivery-address">
+                            <input type="text" id="deliveryAddress" placeholder="Entrez votre adresse de livraison">
+                            <button id="confirmAddress" class="btn-confirm-address">
+                                <i class="fas fa-check"></i> Confirmer
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="important-note">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <div>
+                        <h3>Note importante</h3>
+                        <p>L'ordonnance originale devra être présentée lors du retrait en pharmacie.</p>
+                    </div>
+                </div>
+
+                <button class="btn-continue">Continuer</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/booking.js"></script>
+</body>
+</html>

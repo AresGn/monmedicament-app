@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>PharmLocator</title>
+</head>
+<body>
+    <header>
+        <div class="logo">PharmLocator </div>
+        <nav>
+            <ul>
+                <li><a href="#">Comment ça marche</a></li>
+                <li><a href="#">Pharmacies</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="header-buttons">
+            <a href="#" class="btn btn-demo">Voir une démo</a>
+            <a href="#" class="btn btn-login">Se connecter</a>
+        </div>
+    </header>
+    <section class="hero">
+        <h1>Trouvez vos médicaments en quelques clics</h1>
+        <p>Localisez rapidement les pharmacies ayant vos médicaments en stock</p>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Entrez les noms de vos médicaments (Ex: Paracétamol 200mg, Dolamine 400mg)..." style="width: 600px;">
+            <button id="searchButton">Rechercher</button>
+        </div>
+
+        <!-- Ajouter cette div pour le loader -->
+        <div id="searchLoader" class="search-loader hidden">
+            <div class="loader-content">
+                <div class="spinner"></div>
+                <p>Recherche des pharmacies...</p>
+            </div>
+        </div>
+    </section>
+    <section class="how-it-works">
+        <h2>Comment ça marche ?</h2>
+        <div class="steps-container">
+            <div class="step-card">
+                <div class="step-icon">
+                    <span class="step-number">1</span>
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Recherchez</h3>
+                <p>Saisissez le nom de votre médicament ou scannez votre ordonnance.</p>
+                <div class="step-connector"></div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-icon">
+                    <span class="step-number">2</span>
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <h3>Localisez</h3>
+                <p>Trouvez les pharmacies les plus proches ayant votre médicament en stock.</p>
+                <div class="step-connector"></div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-icon">
+                    <span class="step-number">3</span>
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Obtenez</h3>
+                <p>Contactez la pharmacie ou suivez l'itinéraire pour récupérer votre traitement.</p>
+            </div>
+        </div>
+    </section>
+    <section class="features">
+        <h2><strong>Fonctionnalités</strong></h2>
+        <p>Découvrez comment PharmLocator peut vous aider à trouver vos médicaments rapidement.</p>
+        <div class="features-container">
+            <div class="feature-card">
+                <i class="fas fa-map-marker-alt"></i>
+                <p>Trouvez les pharmacies les plus proches de vous en temps réel</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-check-circle"></i>
+                <p>Vérifiez la disponibilité des médicaments avant de vous déplacer</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-phone"></i>
+                <p>Contactez directement la pharmacie de votre choix</p>
+            </div>
+        </div>
+    </section>
+    <section class="testimonials">
+        <h2>Ce que nos utilisateurs disent</h2>
+        <div class="testimonials-container">
+            <div class="testimonial-card">
+                <div class="testimonial-avatar">
+                    <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Alice D.">
+                </div>
+                <div class="testimonial-content">
+                    <div class="quote-icon">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <p class="testimonial-text">Grâce à PharmLocator, j'ai trouvé mon médicament en moins de 10 minutes. Très pratique !</p>
+                    <div class="testimonial-author">
+                        <strong>Alice D.</strong>
+                        <span class="author-location">Cotonou, Bénin</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-avatar">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Jean K.">
+                </div>
+                <div class="testimonial-content">
+                    <div class="quote-icon">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <p class="testimonial-text">Je recommande cette application à tous ceux qui cherchent des médicaments rapidement.</p>
+                    <div class="testimonial-author">
+                        <strong>Jean K.</strong>
+                        <span class="author-location">Porto-Novo, Bénin</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-avatar">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Fatou M.">
+                </div>
+                <div class="testimonial-content">
+                    <div class="quote-icon">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <p class="testimonial-text">PharmLocator m'a sauvé la vie lors d'une urgence médicale. Merci !</p>
+                    <div class="testimonial-author">
+                        <strong>Fatou M.</strong>
+                        <span class="author-location">Parakou, Bénin</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-section">
+            <h2>PharmLocator</h2>
+            <p>Votre solution pour trouver vos médicaments rapidement et efficacement.</p>
+        </div>
+        <div class="quick-links">
+            <h3>Liens Rapides</h3>
+            <ul>
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#">Recherche</a></li>
+                <li><a href="#">Pharmacies</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
+        </div>
+        <div class="legal">
+            <h3>Légal</h3>
+            <ul>
+                <li><a href="#">Conditions d'utilisation</a></li>
+                <li><a href="#">Politique de confidentialité</a></li>
+                <li><a href="#">Mentions légales</a></li>
+            </ul>
+        </div>
+        <div class="contact-info">
+            <h3>Contact</h3>
+            <p>Email: support@pharmlocator.com</p>
+            <p>Téléphone: +229 01 23 45 67 89</p>
+            <p>Réseaux sociaux: PharmaLocator</p>
+        </div>
+    </footer>
+    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</body>
+</html>

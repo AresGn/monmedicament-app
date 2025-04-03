@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacie Centrale - PharmLocator</title>
+    <link rel="stylesheet" href="css/pharmacy-details.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+    <header class="page-header">
+        <a href="search.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Retour aux résultats
+        </a>
+    </header>
+
+    <main class="pharmacy-details">
+        <div class="pharmacy-hero">
+            <div class="pharmacy-main-info">
+                <h1>Pharmacie Centrale</h1>
+                <div class="rating">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span class="reviews">4.5/5 (128 avis)</span>
+                </div>
+                <div class="status-info">
+                    <p class="status-open"><i class="far fa-clock"></i> Ouvert aujourd'hui jusqu'à 20h</p>
+                    <p class="status-distance"><i class="fas fa-car"></i> À 800m - 5 min en voiture</p>
+                </div>
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Avenue de la République, 75011 Paris</p>
+                    <p><i class="fas fa-phone"></i> 01 23 45 67 89</p>
+                    <p><i class="fas fa-envelope"></i> contact@pharmaciecentrale.fr</p>
+                </div>
+                <a href="booking.html" class="btn-reserve">
+                    <i class="fas fa-shopping-cart"></i>
+                    Réserver un médicament
+                </a>
+            </div>
+            <div class="pharmacy-image">
+                <img src="assets/pharmacy-hero.jpg" alt="Pharmacie Centrale" loading="lazy">
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="left-column">
+                <section class="services-section">
+                    <h2><i class="fas fa-concierge-bell"></i> Services</h2>
+                    <div class="services-grid">
+                        <div class="service-item">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span>Click & Collect</span>
+                            <small>Retrait en 1h</small>
+                        </div>
+                        <div class="service-item">
+                            <i class="fas fa-truck"></i>
+                            <span>Livraison</span>
+                            <small>En 30min - 1h</small>
+                        </div>
+                        <div class="service-item">
+                            <i class="fas fa-credit-card"></i>
+                            <span>Paiement CB</span>
+                            <small>Sans minimum</small>
+                        </div>
+                        <div class="service-item">
+                            <i class="fas fa-comments"></i>
+                            <span>Conseil en ligne</span>
+                            <small>Chat disponible</small>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="hours-section">
+                    <h2><i class="far fa-clock"></i> Horaires d'ouverture</h2>
+                    <div class="hours-table">
+                        <div class="hours-row">
+                            <span class="day">Lundi</span>
+                            <span class="hours">9h00 - 20h00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="day">Mardi</span>
+                            <span class="hours">9h00 - 20h00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="day">Mercredi</span>
+                            <span class="hours">9h00 - 20h00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="day">Jeudi</span>
+                            <span class="hours">9h00 - 20h00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="day">Vendredi</span>
+                            <span class="hours">9h00 - 20h00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="day">Samedi</span>
+                            <span class="hours">10h00 - 19h00</span>
+                        </div>
+                        <div class="hours-row">
+                            <span class="day">Dimanche</span>
+                            <span class="hours">Fermé</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="reviews-section">
+                    <div class="reviews-header">
+                        <h2><i class="fas fa-star"></i> Avis clients</h2>
+                        <button class="btn-add-review">
+                            <i class="fas fa-pen"></i> Laisser un avis
+                        </button>
+                    </div>
+                    <div class="reviews-list">
+                        <div class="review-card">
+                            <div class="review-header">
+                                <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Marie D." class="reviewer-avatar">
+                                <div class="reviewer-info">
+                                    <h3>Marie D.</h3>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="review-date">Il y a 2 jours</span>
+                                </div>
+                            </div>
+                            <p class="review-text">Personnel très accueillant et professionnel. Service rapide et efficace. Je recommande vivement cette pharmacie !</p>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-header">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Pierre L." class="reviewer-avatar">
+                                <div class="reviewer-info">
+                                    <h3>Pierre L.</h3>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="review-date">Il y a 1 semaine</span>
+                                </div>
+                            </div>
+                            <p class="review-text">Très bonne pharmacie, équipe compétente et à l'écoute. Seul bémol : l'attente peut être un peu longue aux heures de pointe.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="right-column">
+                <section class="map-section">
+                    <h2><i class="fas fa-map-marked-alt"></i> Localisation</h2>
+                    <div id="map"></div>
+                    <a href="#" class="link-google-maps">
+                        <i class="fab fa-google"></i> Voir sur Google Maps
+                    </a>
+                </section>
+
+                <section class="photos-section">
+                    <div class="photos-header">
+                        <h2><i class="fas fa-images"></i> Photos</h2>
+                        <span class="photos-count">17 photos</span>
+                    </div>
+                    <div class="photos-grid">
+                        <div class="photo-thumbnail" style="background-image: url('assets/pharmacy-1.jpg')"></div>
+                        <div class="photo-thumbnail" style="background-image: url('assets/pharmacy-2.jpg')"></div>
+                        <div class="photo-thumbnail" style="background-image: url('assets/pharmacy-3.jpg')"></div>
+                    </div>
+                    <a href="#" class="link-all-photos">
+                        <i class="fas fa-images"></i> Voir toutes les photos
+                    </a>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/pharmacy-details.js"></script>
+</body>
+</html>

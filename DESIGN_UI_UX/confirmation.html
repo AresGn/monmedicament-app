@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation - PharmLocator</title>
+    <link rel="stylesheet" href="css/confirmation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="progress-bar">
+        <div class="progress-content">
+            <a href="index.html" class="back-button">
+                <i class="fas fa-chevron-left"></i>
+                <span>Retour à l'accueil</span>
+            </a>
+            <div class="steps">
+                <div class="step completed">
+                    <div class="step-number">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <span>Ordonnance</span>
+                </div>
+                <div class="step-line completed"></div>
+                <div class="step completed">
+                    <div class="step-number">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <span>Vérification</span>
+                </div>
+                <div class="step-line completed"></div>
+                <div class="step completed">
+                    <div class="step-number">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <span>Confirmation</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="confirmation-content">
+        <div class="confirmation-card">
+            <div class="success-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            
+            <h1>Commande confirmée !</h1>
+            <p class="confirmation-message">Votre commande a été validée et sera disponible très prochainement.</p>
+
+            <div class="order-details">
+                <div class="detail-item">
+                    <i class="fas fa-calendar"></i>
+                    <div>
+                        <span class="detail-label">Date de retrait</span>
+                        <p class="detail-value">Aujourd'hui à 16h30</p>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <span class="detail-label">Pharmacie</span>
+                        <p class="detail-value">Pharmacie Centrale, 123 Avenue de la République</p>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-file-alt"></i>
+                    <div>
+                        <span class="detail-label">Numéro de commande</span>
+                        <p class="detail-value">PH-2023-1245</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn-print">
+                    <i class="fas fa-print"></i>
+                    Imprimer
+                </button>
+                <button class="btn-share">
+                    <i class="fas fa-share-alt"></i>
+                    Partager
+                </button>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h2>Conseils importants</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <p>Présentez votre pièce d'identité</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-file-alt"></i>
+                    <p>Gardez votre ordonnance</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>Vérifiez l'adresse</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/confirmation.js"></script>
+</body>
+</html>

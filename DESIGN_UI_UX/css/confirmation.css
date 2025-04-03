@@ -1,0 +1,251 @@
+:root {
+    --primary: #0D9488;
+    --primary-dark: #0F766E;
+    --gray-50: #F9FAFB;
+    --gray-100: #F3F4F6;
+    --gray-200: #E5E7EB;
+    --gray-600: #4B5563;
+    --gray-700: #374151;
+    --gray-800: #1F2937;
+    --green-100: #DCFCE7;
+    --green-600: #16A34A;
+    --blue-50: #EFF6FF;
+    --blue-600: #2563EB;
+    --blue-700: #1D4ED8;
+    --blue-800: #1E40AF;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--gray-50);
+    font-family: system-ui, -apple-system, sans-serif;
+    padding-top: 140px;
+}
+
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 40;
+    padding: 1.5rem 0;
+}
+
+.progress-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.step-number {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--gray-200);
+    color: var(--gray-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.step.completed .step-number {
+    background: var(--primary);
+    color: white;
+}
+
+.step-line {
+    flex: 1;
+    height: 2px;
+    background: var(--gray-200);
+    min-width: 60px;
+}
+
+.step-line.completed {
+    background: var(--primary);
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    color: var(--gray-600);
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    transition: color 0.3s;
+}
+
+.back-button:hover {
+    color: var(--primary);
+}
+
+.back-button i {
+    margin-right: 0.5rem;
+}
+
+.confirmation-content {
+    max-width: 42rem;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.confirmation-card {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    text-align: center;
+}
+
+.success-icon {
+    width: 6rem;
+    height: 6rem;
+    background: var(--green-100);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.success-icon i {
+    font-size: 2rem;
+    color: var(--green-600);
+}
+
+h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 1rem;
+}
+
+.confirmation-message {
+    color: var(--gray-600);
+    margin-bottom: 1.5rem;
+}
+
+.order-details {
+    background: var(--gray-50);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.detail-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.detail-item:last-child {
+    margin-bottom: 0;
+}
+
+.detail-item i {
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
+.detail-label {
+    font-weight: 500;
+    color: var(--gray-800);
+    display: block;
+}
+
+.detail-value {
+    color: var(--gray-600);
+    margin: 0.25rem 0 0;
+}
+
+.action-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.btn-print, .btn-share {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-print {
+    background: white;
+    border: 1px solid var(--gray-200);
+    color: var(--gray-700);
+}
+
+.btn-print:hover {
+    background: var(--gray-50);
+}
+
+.btn-share {
+    background: var(--primary);
+    border: none;
+    color: white;
+}
+
+.btn-share:hover {
+    background: var(--primary-dark);
+}
+
+.info-card {
+    background: var(--blue-50);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.info-card h2 {
+    color: var(--blue-800);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.info-grid {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-item {
+    flex: 1;
+}
+
+.info-item i {
+    color: var(--blue-600);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.info-item p {
+    color: var(--blue-700);
+    font-size: 0.875rem;
+    margin: 0;
+}
