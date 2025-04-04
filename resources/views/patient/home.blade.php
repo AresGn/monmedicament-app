@@ -56,6 +56,7 @@
         width: 100%;
         gap: 0.5rem;
         box-sizing: border-box;
+        position: relative;
     }
 
     .search-input-container input {
@@ -233,6 +234,56 @@
         border: none;
         color: #ff4d4f;
         cursor: pointer;
+    }
+
+    /* Styles d'autocomplétion */
+    .autocomplete-container {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        max-height: 200px;
+        overflow-y: auto;
+        background-color: white;
+        border-radius: 0.25rem;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        z-index: 10;
+        display: none;
+    }
+    
+    .autocomplete-container.active {
+        display: block;
+    }
+    
+    .autocomplete-item {
+        padding: 0.75rem 1rem;
+        cursor: pointer;
+        border-bottom: 1px solid #f0f0f0;
+        transition: background-color 0.2s;
+    }
+    
+    .autocomplete-item:last-child {
+        border-bottom: none;
+    }
+    
+    .autocomplete-item:hover, .autocomplete-item.selected {
+        background-color: #f0f9ff;
+    }
+    
+    .autocomplete-item .medicine-name {
+        font-weight: 600;
+        color: #333;
+    }
+    
+    .autocomplete-item .medicine-info {
+        font-size: 0.8rem;
+        color: #666;
+        margin-top: 0.25rem;
+    }
+    
+    .highlight-match {
+        background-color: rgba(0, 123, 255, 0.15);
+        font-weight: bold;
     }
 
     /* Tablet and Desktop styles */
@@ -1160,6 +1211,7 @@
                     <div class="search-input-container">
                         <input type="text" name="query" id="searchInput" placeholder="Entrez les noms de vos médicaments (Ex: Paracétamol 200mg)..." required>
                         <button type="submit" class="search-button">Rechercher</button>
+                        <div id="autocompleteContainer" class="autocomplete-container"></div>
                     </div>
 
                     <div class="search-divider">
@@ -1475,6 +1527,170 @@
         let markers = [];
         let userMarker = null;
         let userLocation = null;
+        
+        // Liste des médicaments pour l'autocomplétion
+        const medicines = [
+            { name: 'Paracétamol 500mg', active: 'Paracétamol', laboratory: 'Sanofi', description: 'Analgésique et antipyrétique courant', category: 'PAINKILLERS', prescription: false },
+            { name: 'Amoxicilline 250mg', active: 'Amoxicilline', laboratory: 'GSK', description: 'Antibiotique à large spectre', category: 'ANTIBIOTICS', prescription: true },
+            { name: 'Ibuprofène 400mg', active: 'Ibuprofène', laboratory: 'Mylan', description: 'Anti-inflammatoire non stéroïdien', category: 'PAINKILLERS', prescription: false },
+            { name: 'Doliprane 1000mg', active: 'Paracétamol', laboratory: 'Sanofi', description: 'Traitement symptomatique des douleurs et fièvre', category: 'PAINKILLERS', prescription: false },
+            { name: 'Azithromycine 500mg', active: 'Azithromycine', laboratory: 'Pfizer', description: 'Antibiotique de la famille des macrolides', category: 'ANTIBIOTICS', prescription: true },
+            { name: 'Vitamine C 1000mg', active: 'Acide ascorbique', laboratory: 'Bayer', description: 'Complément vitaminique', category: 'VITAMINS', prescription: false },
+            { name: 'Augmentin 875mg', active: 'Amoxicilline + Acide clavulanique', laboratory: 'GSK', description: 'Antibiotique à large spectre renforcé', category: 'ANTIBIOTICS', prescription: true },
+            { name: 'Aspirine 500mg', active: 'Acide acétylsalicylique', laboratory: 'Bayer', description: 'Analgésique, antipyrétique et anti-inflammatoire', category: 'PAINKILLERS', prescription: false },
+            { name: 'Maalox', active: "Hydroxyde d'aluminium + Hydroxyde de magnésium", laboratory: 'Sanofi', description: 'Antiacide pour les troubles digestifs', category: 'OTHER', prescription: false },
+            { name: 'Chloroquine 250mg', active: 'Chloroquine', laboratory: 'Sanofi', description: 'Traitement du paludisme', category: 'ANTIVIRALS', prescription: true }
+        ];
+        
+        // Implémenter l'autocomplétion
+        function setupAutocomplete() {
+            const searchInput = document.getElementById('searchInput');
+            const autocompleteContainer = document.getElementById('autocompleteContainer');
+            
+            // Événement d'entrée de texte dans le champ de recherche
+            searchInput.addEventListener('input', function() {
+                const query = this.value.trim().toLowerCase();
+                
+                // Effacer et masquer le conteneur s'il n'y a pas de saisie
+                if (!query) {
+                    autocompleteContainer.innerHTML = '';
+                    autocompleteContainer.classList.remove('active');
+                    return;
+                }
+                
+                // Filtrer les médicaments correspondant à la requête
+                const matches = medicines.filter(medicine => {
+                    return medicine.name.toLowerCase().includes(query) || 
+                           medicine.active.toLowerCase().includes(query) ||
+                           medicine.laboratory.toLowerCase().includes(query);
+                });
+                
+                // Mettre à jour et afficher les résultats d'autocomplétion
+                if (matches.length > 0) {
+                    updateAutocompleteResults(matches, query);
+                    autocompleteContainer.classList.add('active');
+                } else {
+                    autocompleteContainer.innerHTML = '';
+                    autocompleteContainer.classList.remove('active');
+                }
+            });
+            
+            // Fermer l'autocomplétion si on clique en dehors
+            document.addEventListener('click', function(e) {
+                if (!searchInput.contains(e.target) && !autocompleteContainer.contains(e.target)) {
+                    autocompleteContainer.classList.remove('active');
+                }
+            });
+            
+            // Gérer les touches de navigation (flèches haut/bas et entrée)
+            searchInput.addEventListener('keydown', function(e) {
+                const items = autocompleteContainer.querySelectorAll('.autocomplete-item');
+                let selected = autocompleteContainer.querySelector('.autocomplete-item.selected');
+                
+                if (items.length === 0) return;
+                
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    if (!selected) {
+                        items[0].classList.add('selected');
+                    } else {
+                        selected.classList.remove('selected');
+                        const next = selected.nextElementSibling;
+                        if (next) {
+                            next.classList.add('selected');
+                        } else {
+                            items[0].classList.add('selected');
+                        }
+                    }
+                    
+                    autocompleteContainer.querySelector('.autocomplete-item.selected')?.scrollIntoView({
+                        block: 'nearest',
+                        behavior: 'smooth'
+                    });
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    if (!selected) {
+                        items[items.length - 1].classList.add('selected');
+                    } else {
+                        selected.classList.remove('selected');
+                        const prev = selected.previousElementSibling;
+                        if (prev) {
+                            prev.classList.add('selected');
+                        } else {
+                            items[items.length - 1].classList.add('selected');
+                        }
+                    }
+                    
+                    autocompleteContainer.querySelector('.autocomplete-item.selected')?.scrollIntoView({
+                        block: 'nearest',
+                        behavior: 'smooth'
+                    });
+                } else if (e.key === 'Enter' && selected) {
+                    e.preventDefault();
+                    selectAutocompleteItem(selected);
+                } else if (e.key === 'Escape') {
+                    autocompleteContainer.classList.remove('active');
+                }
+            });
+        }
+        
+        // Mettre à jour les résultats d'autocomplétion
+        function updateAutocompleteResults(results, query) {
+            const autocompleteContainer = document.getElementById('autocompleteContainer');
+            autocompleteContainer.innerHTML = '';
+            
+            results.forEach(medicine => {
+                const item = document.createElement('div');
+                item.className = 'autocomplete-item';
+                
+                // Mettre en surbrillance les parties correspondantes
+                const nameParts = highlightMatch(medicine.name, query);
+                const activeParts = highlightMatch(medicine.active, query);
+                
+                item.innerHTML = `
+                    <div class="medicine-name">${nameParts}</div>
+                    <div class="medicine-info">
+                        <span>${activeParts}</span> - ${medicine.laboratory} 
+                        ${medicine.prescription ? '<span style="color: #f59e0b"><i class="fas fa-prescription"></i> Sur ordonnance</span>' : ''}
+                    </div>
+                `;
+                
+                // Événement de clic sur un élément de la liste
+                item.addEventListener('click', function() {
+                    selectAutocompleteItem(this);
+                });
+                
+                autocompleteContainer.appendChild(item);
+            });
+        }
+        
+        // Mettre en surbrillance les parties correspondantes
+        function highlightMatch(text, query) {
+            if (!query) return text;
+            
+            const lowerText = text.toLowerCase();
+            const lowerQuery = query.toLowerCase();
+            
+            if (!lowerText.includes(lowerQuery)) return text;
+            
+            const startIndex = lowerText.indexOf(lowerQuery);
+            const endIndex = startIndex + lowerQuery.length;
+            
+            return text.substring(0, startIndex) + 
+                   `<span class="highlight-match">${text.substring(startIndex, endIndex)}</span>` + 
+                   text.substring(endIndex);
+        }
+        
+        // Sélectionner un élément d'autocomplétion
+        function selectAutocompleteItem(item) {
+            const searchInput = document.getElementById('searchInput');
+            const medicineName = item.querySelector('.medicine-name').textContent;
+            searchInput.value = medicineName;
+            document.getElementById('autocompleteContainer').classList.remove('active');
+        }
+        
+        // Initialiser l'autocomplétion
+        setupAutocomplete();
 
         // Initialize the map
         function initMap() {

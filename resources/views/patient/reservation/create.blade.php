@@ -21,19 +21,17 @@
     .progress-bar {
         background-color: var(--white);
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        padding: 1rem;
-        margin-bottom: 1.5rem;
-        position: sticky;
-        top: 0;
-        z-index: 100;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
     }
 
     .progress-content {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         max-width: 1200px;
         margin: 0 auto;
-        gap: 1.5rem;
+        gap: 1rem;
+        align-items: center;
     }
 
     .back-button {
@@ -43,12 +41,21 @@
         color: var(--primary);
         text-decoration: none;
         font-weight: 500;
+        font-size: 1rem;
+        padding: 0.5rem 0;
+        transition: transform 0.2s;
+        margin-right: 2rem;
+    }
+
+    .back-button:hover {
+        transform: translateX(-3px);
     }
 
     .steps {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
+        flex: 1;
     }
 
     .step {
@@ -57,12 +64,11 @@
         align-items: center;
         position: relative;
         z-index: 1;
-        flex: 1;
     }
 
     .step-number {
-        width: 32px;
-        height: 32px;
+        width: 44px;
+        height: 44px;
         border-radius: 50%;
         background-color: #e9ecef;
         color: var(--text-gray);
@@ -70,33 +76,35 @@
         align-items: center;
         justify-content: center;
         font-weight: 600;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
+        font-size: 1.1rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     .step.active .step-number {
         background-color: var(--primary);
         color: var(--white);
+        box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.15);
     }
 
     .step span {
-        font-size: 0.85rem;
+        font-size: 1rem;
         color: var(--text-gray);
         text-align: center;
+        font-weight: 500;
+        white-space: nowrap;
     }
 
     .step.active span {
         color: var(--primary);
-        font-weight: 500;
+        font-weight: 600;
     }
 
     .step-line {
-        flex: 1;
-        height: 2px;
+        height: 3px;
+        width: 120px;
         background-color: #e9ecef;
-        margin: 0 0.5rem;
-        position: relative;
-        top: -16px;
-        z-index: 0;
+        margin: 0 20px;
     }
 
     .step-line.active {
@@ -119,21 +127,23 @@
     /* Upload section */
     .upload-section, .additional-info, .pharmacy-info, .pickup-mode, .delivery-map-section, .important-note {
         background-color: var(--white);
-        border-radius: 0.5rem;
-        padding: 1.5rem;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        border-radius: 0.75rem;
+        padding: 1.75rem;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.05);
     }
 
     h2 {
-        font-size: 1.25rem;
+        font-size: 1.35rem;
         color: var(--text-dark);
         margin-bottom: 1.5rem;
+        font-weight: 600;
+        font-family: 'Poppins', sans-serif;
     }
 
     .upload-zone {
         border: 2px dashed #dee2e6;
-        border-radius: 0.5rem;
-        padding: 2rem;
+        border-radius: 0.75rem;
+        padding: 2.5rem;
         text-align: center;
         margin-bottom: 1rem;
         background-color: var(--light-gray);
@@ -146,20 +156,21 @@
     }
 
     .upload-zone i {
-        font-size: 3rem;
+        font-size: 3.5rem;
         color: var(--primary);
-        margin-bottom: 1rem;
+        margin-bottom: 1.25rem;
         display: block;
     }
 
     .upload-zone p {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.75rem;
         color: var(--text-gray);
+        font-size: 1.1rem;
     }
 
     .upload-buttons {
         display: flex;
-        gap: 1rem;
+        gap: 1.25rem;
         justify-content: center;
         flex-wrap: wrap;
     }
@@ -168,29 +179,32 @@
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        padding: 0.5rem 1rem;
+        padding: 0.75rem 1.25rem;
         border: 1px solid var(--primary);
         background: transparent;
         color: var(--primary);
-        border-radius: 0.25rem;
+        border-radius: 0.5rem;
         cursor: pointer;
         transition: all 0.3s;
+        font-weight: 500;
     }
 
     .btn-upload:hover, .btn-camera:hover {
         background-color: var(--primary);
         color: var(--white);
+        transform: translateY(-2px);
     }
 
     .upload-info {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         color: var(--text-gray);
         text-align: center;
+        margin-top: 1rem;
     }
 
     /* Form groups */
     .form-group {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.75rem;
     }
 
     .form-group:last-child {
@@ -199,17 +213,18 @@
 
     label {
         display: block;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
         color: var(--text-dark);
         font-weight: 500;
     }
 
     textarea, input[type="text"] {
         width: 100%;
-        padding: 0.75rem;
+        padding: 0.9rem;
         border: 1px solid #dee2e6;
-        border-radius: 0.25rem;
+        border-radius: 0.5rem;
         background-color: var(--light-gray);
+        font-family: 'Roboto', sans-serif;
     }
 
     textarea {
@@ -220,14 +235,14 @@
     /* Pharmacy card */
     .pharmacy-card {
         display: flex;
-        gap: 1rem;
-        margin-bottom: 1rem;
+        gap: 1.25rem;
+        margin-bottom: 1.25rem;
     }
 
     .pharmacy-image {
         width: 80px;
         height: 80px;
-        border-radius: 0.25rem;
+        border-radius: 0.5rem;
         overflow: hidden;
         background-color: #e9ecef;
         background-image: url('{{ asset('img/pharmacy-placeholder.jpg') }}');
@@ -236,18 +251,19 @@
     }
 
     .pharmacy-details h3 {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         margin-bottom: 0.5rem;
         color: var(--primary);
+        font-weight: 600;
     }
 
     .pharmacy-details p {
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        margin: 0.25rem 0;
+        margin: 0.35rem 0;
         color: var(--text-gray);
-        font-size: 0.9rem;
+        font-size: 0.95rem;
     }
 
     /* Pickup options */
@@ -260,27 +276,31 @@
     .pickup-option {
         display: flex;
         align-items: center;
-        gap: 0.75rem;
-        padding: 1rem;
+        gap: 0.85rem;
+        padding: 1.25rem;
         border: 1px solid #dee2e6;
-        border-radius: 0.25rem;
+        border-radius: 0.5rem;
         cursor: pointer;
         transition: all 0.3s;
     }
 
     .pickup-option:hover {
         border-color: var(--primary);
+        background-color: rgba(0, 123, 255, 0.03);
     }
 
     .pickup-option input {
         margin: 0;
+        width: 20px;
+        height: 20px;
     }
 
     /* Delivery map */
     #deliveryMap {
         height: 300px;
-        border-radius: 0.25rem;
+        border-radius: 0.5rem;
         margin-bottom: 1rem;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
     .delivery-info {
@@ -309,9 +329,15 @@
         background-color: var(--primary);
         color: var(--white);
         border: none;
-        border-radius: 0.25rem;
+        border-radius: 0.5rem;
         cursor: pointer;
         white-space: nowrap;
+        transition: all 0.2s;
+    }
+
+    .btn-confirm-address:hover {
+        background-color: #0069d9;
+        transform: translateY(-2px);
     }
 
     /* Important note */
@@ -320,6 +346,8 @@
         gap: 1rem;
         background-color: rgba(255, 193, 7, 0.1);
         border-left: 4px solid var(--warning);
+        padding: 1.25rem;
+        border-radius: 0.5rem;
     }
 
     .important-note i {
@@ -329,12 +357,12 @@
 
     .important-note h3 {
         font-size: 1rem;
-        margin-bottom: 0.25rem;
+        margin-bottom: 0.35rem;
         color: var(--text-dark);
     }
 
     .important-note p {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
         color: var(--text-gray);
         margin: 0;
     }
@@ -343,102 +371,61 @@
     .btn-continue {
         display: block;
         width: 100%;
-        padding: 1rem;
+        padding: 1.15rem;
         background-color: var(--primary);
         color: var(--white);
         border: none;
         border-radius: 0.5rem;
-        font-size: 1rem;
+        font-size: 1.1rem;
         font-weight: 600;
         text-align: center;
         cursor: pointer;
         transition: all 0.3s;
-        margin-top: 1.5rem;
+        margin-top: 1.75rem;
+        box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
     }
 
     .btn-continue:hover {
         background-color: #0069d9;
-        transform: translateY(-2px);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 8px rgba(0, 123, 255, 0.25);
     }
 
     /* Responsive design */
     @media (min-width: 768px) {
         .progress-content {
             flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .main-grid {
-            flex-direction: row;
+        .back-button {
+            margin-right: 2rem;
         }
 
-        .main-column {
-            flex: 2;
-        }
-
-        .side-column {
+        .steps-container {
             flex: 1;
         }
     }
 
-    /* Medicines selection */
-    .medicine-selection {
-        margin-top: 2rem;
-    }
+    @media (max-width: 767px) {
+        .progress-content {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .back-button {
+            align-self: flex-start;
+        }
+        
+        .steps-container {
+            width: 100%;
+        }
 
-    .medicine-list {
-        margin-top: 1rem;
-    }
-
-    .medicine-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 1rem;
-        background-color: var(--light-gray);
-        border-radius: 0.25rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .medicine-info {
-        flex: 1;
-    }
-
-    .medicine-name {
-        font-weight: 600;
-        color: var(--text-dark);
-        margin-bottom: 0.25rem;
-    }
-
-    .medicine-price {
-        color: var(--text-gray);
-        font-size: 0.9rem;
-    }
-
-    .medicine-quantity {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .quantity-input {
-        width: 60px;
-        text-align: center;
-        padding: 0.5rem;
-        border: 1px solid #dee2e6;
-        border-radius: 0.25rem;
-    }
-
-    .btn-quantity {
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--primary);
-        color: var(--white);
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
+        .step-line {
+            width: 60px;
+            margin: 0 10px;
+        }
     }
 </style>
 @endpush
@@ -446,7 +433,7 @@
 @section('content')
 <div class="progress-bar">
     <div class="progress-content">
-        <a href="{{ route('patient.search.pharmacy.details', $pharmacy->id) }}" class="back-button">
+        <a href="{{ url()->previous() }}" class="back-button">
             <i class="fas fa-chevron-left"></i>
             <span>Retour</span>
         </a>
@@ -456,7 +443,7 @@
                 <span>Ordonnance</span>
             </div>
             <div class="step-line active"></div>
-            <div class="step active">
+            <div class="step">
                 <div class="step-number">2</div>
                 <span>Vérification</span>
             </div>
@@ -497,42 +484,14 @@
                     <p class="upload-info">Formats acceptés : JPG, PNG, PDF - Max 10MB</p>
                 </section>
 
-                @if(count($medicines) > 0)
-                <section class="medicine-selection">
-                    <h2>Médicaments disponibles</h2>
-                    <div class="medicine-list">
-                        @foreach($medicines as $index => $medicine)
-                        <div class="medicine-item">
-                            <div class="medicine-info">
-                                <div class="medicine-name">{{ $medicine['name'] }}</div>
-                                <div class="medicine-price">{{ number_format($medicine['price'], 0, ',', ' ') }} FCFA</div>
-                            </div>
-                            <div class="medicine-quantity">
-                                <button type="button" class="btn-quantity decrease-qty"><i class="fas fa-minus"></i></button>
-                                <input type="number" class="quantity-input" name="medicines[{{ $index }}][quantity]" value="0" min="0" max="{{ $medicine['max_quantity'] }}" data-max="{{ $medicine['max_quantity'] }}">
-                                <button type="button" class="btn-quantity increase-qty"><i class="fas fa-plus"></i></button>
-                                <input type="hidden" name="medicines[{{ $index }}][id]" value="{{ $medicine['id'] }}">
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                </section>
-                @endif
-
                 <section class="additional-info">
                     <h2>Informations complémentaires</h2>
                     <div class="form-group">
-                        <label for="special_instructions">Instructions particulières</label>
-                        <textarea id="special_instructions" name="special_instructions" placeholder="Ex: Allergie à certains génériques, préférence de marque..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="reservation_date">Date et heure souhaitées pour le retrait</label>
-                        <input type="datetime-local" id="reservation_date" name="reservation_date" required min="{{ date('Y-m-d\TH:i', strtotime('+1 hour')) }}">
+                        <label for="instructions">Instructions particulières ou commentaires (facultatif)</label>
+                        <textarea id="instructions" name="instructions" placeholder="Ex: Je suis allergique à certains composants, veuillez vérifier la composition..."></textarea>
                     </div>
                 </section>
-            </div>
 
-            <div class="side-column">
                 <section class="pharmacy-info">
                     <h2>Pharmacie sélectionnée</h2>
                     <div class="pharmacy-card">
@@ -540,7 +499,8 @@
                         <div class="pharmacy-details">
                             <h3>{{ $pharmacy->name }}</h3>
                             <p><i class="fas fa-map-marker-alt"></i> {{ $pharmacy->address }}</p>
-                            <p><i class="far fa-clock"></i> Retrait possible sous 1h</p>
+                            <p><i class="fas fa-phone"></i> {{ $pharmacy->phone_number }}</p>
+                            <p><i class="fas fa-clock"></i> Ouvert aujourd'hui: 08:30 - 19:30</p>
                         </div>
                     </div>
                 </section>
@@ -785,30 +745,6 @@
             }
             document.getElementById('estimatedTime').textContent = estimatedTime;
         }
-
-        // Quantity controls
-        const quantityInputs = document.querySelectorAll('.quantity-input');
-        const decreaseBtns = document.querySelectorAll('.decrease-qty');
-        const increaseBtns = document.querySelectorAll('.increase-qty');
-
-        decreaseBtns.forEach((btn, index) => {
-            btn.addEventListener('click', function() {
-                const input = quantityInputs[index];
-                if (parseInt(input.value) > 0) {
-                    input.value = parseInt(input.value) - 1;
-                }
-            });
-        });
-
-        increaseBtns.forEach((btn, index) => {
-            btn.addEventListener('click', function() {
-                const input = quantityInputs[index];
-                const maxValue = parseInt(input.dataset.max);
-                if (parseInt(input.value) < maxValue) {
-                    input.value = parseInt(input.value) + 1;
-                }
-            });
-        });
     });
 </script>
-@endpush 
+@endpush

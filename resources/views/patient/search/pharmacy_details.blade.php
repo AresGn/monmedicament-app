@@ -516,7 +516,7 @@
                 <p><i class="fas fa-envelope"></i> {{ $pharmacy->email }}</p>
                 @endif
             </div>
-            @if(Auth::guard('patient')->check())
+            @if(Auth::check() && Auth::user()->user_type === 'PATIENT')
             <a href="{{ route('patient.reservations.create', ['pharmacy_id' => $pharmacy->id]) }}" class="btn-reserve">
                 <i class="fas fa-calendar-check"></i>
                 <span>Réserver</span>

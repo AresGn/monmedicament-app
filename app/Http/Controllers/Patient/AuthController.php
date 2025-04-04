@@ -42,7 +42,7 @@ class AuthController extends Controller
         }
 
         $credentials = $request->only('email', 'password');
-        $remember = $request->has('remember');
+        $remember = false; // Force à false pour éviter l'utilisation de remember_token
 
         // Vérifie si l'utilisateur existe et est un patient
         $user = User::where('email', $request->email)->first();
@@ -104,7 +104,7 @@ class AuthController extends Controller
         $user = User::create([
             'username' => $request->username,
             'email' => $request->email,
-            'password_hash' => Hash::make($request->password),
+            'password' => $request->password,
             'phone_number' => $request->phone_number,
             'user_type' => 'PATIENT',
             'full_name' => $request->full_name,
@@ -152,7 +152,7 @@ class AuthController extends Controller
             $user = User::create([
                 'username' => $this->generateUniqueUsername($socialUser->getNickname() ?? $socialUser->getName()),
                 'email' => $socialUser->getEmail(),
-                'password_hash' => Hash::make(Str::random(16)),
+                'password' => Str::random(16),
                 'user_type' => 'PATIENT',
                 'full_name' => $socialUser->getName(),
             ]);

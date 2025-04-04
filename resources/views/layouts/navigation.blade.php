@@ -9,91 +9,60 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav me-auto">
-                @auth
-                    @if(Auth::user()->user_type === 'PATIENT')
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('patient.search.*') ? 'active' : '' }}" href="#">
-                                <i class="fas fa-search d-inline d-md-none me-2"></i>Rechercher
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('patient.reservations.*') ? 'active' : '' }}" href="{{ route('patient.reservations.index') }}">
-                                <i class="fas fa-calendar-check d-inline d-md-none me-2"></i>Réservations
-                            </a>
-                        </li>
-                    @elseif(Auth::user()->user_type === 'PHARMACY')
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('pharmacy.dashboard.*') ? 'active' : '' }}" href="{{ route('pharmacy.dashboard.index') }}">
-                                <i class="fas fa-tachometer-alt d-inline d-md-none me-2"></i>Tableau de bord
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('pharmacy.inventory.*') ? 'active' : '' }}" href="{{ route('pharmacy.inventory.index') }}">
-                                <i class="fas fa-pills d-inline d-md-none me-2"></i>Inventaire
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('pharmacy.reservations.*') ? 'active' : '' }}" href="{{ route('pharmacy.reservations.index') }}">
-                                <i class="fas fa-calendar-check d-inline d-md-none me-2"></i>Réservations
-                            </a>
-                        </li>
-                    @endif
-                @else
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('patient.search.*') ? 'active' : '' }}" href="#">
-                            <i class="fas fa-search d-inline d-md-none me-2"></i>Rechercher
-                        </a>
-                    </li>
-                @endauth
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('patient.home') }}#how-it-works">
+                        Comment ça marche
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/patient/pharmacies') }}">
+                        Pharmacies
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/contact') }}">
+                        Contact
+                    </a>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav">
                 <!-- Authentication Links -->
                 @guest
-                    @if (Route::has('patient.auth.login'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('patient.auth.login') }}">
-                                <i class="fas fa-sign-in-alt d-inline d-md-none me-2"></i>{{ __('Connexion') }}
-                            </a>
-                        </li>
-                    @endif
-
-                    @if (Route::has('patient.auth.register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('patient.auth.register') }}">
-                                <i class="fas fa-user-plus d-inline d-md-none me-2"></i>{{ __('Inscription') }}
-                            </a>
-                        </li>
-                    @endif
-                @else
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            <i class="fas fa-user-circle d-inline d-md-none me-2"></i>{{ Auth::user()->full_name }}
+                    <li class="nav-item me-2">
+                        <a class="btn btn-outline-primary" href="{{ route('patient.search.index') }}">
+                            Voir une démo
                         </a>
-
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            @if(Auth::user()->user_type === 'PATIENT')
-                                <a class="dropdown-item" href="{{ route('patient.profile.edit') }}">
-                                    <i class="fas fa-user me-2"></i>Mon profil
-                                </a>
-                            @elseif(Auth::user()->user_type === 'PHARMACY')
-                                <a class="dropdown-item" href="{{ route('pharmacy.profile.edit') }}">
-                                    <i class="fas fa-store me-2"></i>Profil de la pharmacie
-                                </a>
-                            @endif
-                            
-                            <a class="dropdown-item" href="#"
-                               onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                <i class="fas fa-sign-out-alt me-2"></i>{{ __('Déconnexion') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('patient.auth.logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="{{ route('patient.auth.login') }}">
+                            Se connecter
+                        </a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ Auth::user()->user_type === 'PATIENT' ? route('patient.profile.edit') : route('pharmacy.profile.edit') }}" title="Mon compte">
+                            <div class="auth-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" title="Déconnexion">
+                            <div class="auth-icon logout-icon">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </div>
+                        </a>
+                        
+                        <form id="logout-form" action="{{ route('patient.auth.logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </li>
                 @endguest
             </ul>
@@ -104,103 +73,175 @@
 <style>
     /* Styles pour la navigation */
     .navbar {
-        padding: 0.5rem 1rem;
+        padding: 0.75rem 1rem;
     }
     
     .navbar-brand {
         font-family: 'Poppins', sans-serif;
         font-weight: 600;
-        color: var(--primary);
+        color: #007BFF;
+        font-size: 1.4rem;
+        margin-right: 2rem;
     }
     
     .navbar-nav .nav-link {
         color: #444;
         font-weight: 500;
-        padding: 0.5rem 0.75rem;
+        padding: 0.5rem 1rem;
         transition: all 0.2s;
+        font-size: 1rem;
     }
     
     .navbar-nav .nav-link:hover,
     .navbar-nav .nav-link.active {
-        color: var(--primary);
+        color: #007BFF;
     }
     
-    .dropdown-menu {
-        border-radius: 0.25rem;
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-        border: none;
-        padding: 0.5rem 0;
+    .btn-outline-primary {
+        border-color: #007BFF;
+        color: #007BFF;
+        padding: 0.5rem 1.25rem;
+        font-size: 0.95rem;
+        border-radius: 4px;
     }
     
-    .dropdown-item {
-        padding: 0.5rem 1.5rem;
+    .btn-primary {
+        background-color: #007BFF;
+        border-color: #007BFF;
+        padding: 0.5rem 1.25rem;
+        font-size: 0.95rem;
+        border-radius: 4px;
+    }
+    
+    .btn-outline-primary:hover {
+        background-color: rgba(0, 123, 255, 0.1);
+        color: #007BFF;
+    }
+    
+    .btn-primary:hover {
+        background-color: #0069d9;
+    }
+    
+    .navbar-nav.mx-auto {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .navbar-nav.mx-auto .nav-item {
+        margin: 0 0.75rem;
+    }
+    
+    /* Style pour les icônes de navigation */
+    .navbar-nav .auth-icon {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: all 0.3s;
+        background-color: #f8f9fa;
+    }
+    
+    .navbar-nav .auth-icon:hover {
+        background-color: rgba(0, 123, 255, 0.15);
+        color: #007BFF;
+    }
+    
+    .navbar-nav .auth-icon i {
+        font-size: 1.2rem;
         color: #444;
     }
     
-    .dropdown-item:hover {
-        background-color: rgba(0, 123, 255, 0.1);
-        color: var(--primary);
+    .navbar-nav .auth-icon:hover i {
+        color: #007BFF;
     }
     
-    /* Styles mobile-first pour la navigation */
+    /* Style spécifique pour l'icône de déconnexion */
+    .navbar-nav .auth-icon.logout-icon:hover {
+        background-color: rgba(220, 53, 69, 0.15);
+    }
+    
+    .navbar-nav .auth-icon.logout-icon:hover i {
+        color: #dc3545;
+    }
+    
+    /* Styles responsive */
     @media (max-width: 767.98px) {
         .navbar-brand {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
         
         .navbar-collapse {
-            margin-top: 1rem;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
         }
         
         .navbar-nav .nav-item {
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 0.25rem 0;
+            text-align: center;
         }
         
-        .navbar-nav .nav-link {
-            padding: 0.75rem 0.5rem;
+        .navbar-nav .btn {
+            display: block;
+            width: 100%;
+            margin-top: 0.5rem;
+            text-align: center;
         }
         
-        .dropdown-menu {
-            border: none;
-            box-shadow: none;
-            padding-left: 1rem;
+        .navbar-nav .nav-item + .nav-item {
+            margin-top: 0.5rem;
         }
         
-        .dropdown-item {
-            padding: 0.5rem 0;
+        .navbar-nav .auth-icon {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Style pour la barre d'authentification sur mobile */
+        .navbar-nav {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .navbar-nav .nav-item {
+            margin: 0.5rem;
+            padding: 0;
+            width: 100%;
         }
     }
     
     /* Styles pour grands écrans */
     @media (min-width: 768px) {
         .navbar {
-            padding: 0.5rem 2rem;
+            padding: 0.75rem 2rem;
+        }
+        
+        .navbar-nav .nav-item {
+            margin: 0 0.75rem;
+        }
+        
+        .btn {
+            padding: 0.5rem 1.25rem;
+        }
+    }
+    
+    @media (min-width: 992px) {
+        .navbar {
+            padding: 0.75rem 3rem;
         }
         
         .container {
             max-width: 1200px;
         }
         
-        .navbar-nav {
-            align-items: center;
-        }
-        
         .navbar-nav .nav-item {
-            margin: 0 0.25rem;
-        }
-    }
-    
-    @media (min-width: 992px) {
-        .navbar {
-            padding: 0.5rem 3rem;
-        }
-        
-        .navbar-brand {
-            font-size: 1.5rem;
-        }
-        
-        .navbar-nav .nav-item {
-            margin: 0 0.5rem;
+            margin: 0 1rem;
         }
     }
 </style> 

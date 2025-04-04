@@ -29,17 +29,39 @@ class MedicineSearchApiController extends Controller
         ]);
 
         $query = $request->input('query');
-
-        // Find pharmacies that have the medicine in stock
-        $results = PharmacyInventory::join('medicines', 'pharmacy_inventory.medicine_id', '=', 'medicines.id')
+        
+        // Split the query by commas to search for multiple medications
+        $searchTerms = array_map('trim', explode(',', $query));
+        
+        // Base query
+        $baseQuery = PharmacyInventory::join('medicines', 'pharmacy_inventory.medicine_id', '=', 'medicines.id')
             ->join('pharmacies', 'pharmacy_inventory.pharmacy_id', '=', 'pharmacies.id')
-            ->where(function($q) use ($query) {
-                $q->where('medicines.name', 'like', "%{$query}%")
-                  ->orWhere('medicines.generic_name', 'like', "%{$query}%");
-            })
             ->where('pharmacy_inventory.in_stock', true)
-            ->where('pharmacy_inventory.quantity_available', '>', 0)
-            ->select(
+            ->where('pharmacy_inventory.quantity_available', '>', 0);
+            
+        // Apply search terms with OR conditions
+        $baseQuery->where(function($mainQuery) use ($searchTerms) {
+            foreach ($searchTerms as $index => $term) {
+                if (empty($term)) continue;
+                
+                if ($index === 0) {
+                    // First term
+                    $mainQuery->where(function($q) use ($term) {
+                        $q->where('medicines.name', 'like', "%{$term}%")
+                          ->orWhere('medicines.generic_name', 'like', "%{$term}%");
+                    });
+                } else {
+                    // Additional terms with OR
+                    $mainQuery->orWhere(function($q) use ($term) {
+                        $q->where('medicines.name', 'like', "%{$term}%")
+                          ->orWhere('medicines.generic_name', 'like', "%{$term}%");
+                    });
+                }
+            }
+        });
+        
+        // Complete the query
+        $results = $baseQuery->select(
                 'pharmacies.id as pharmacy_id',
                 'pharmacies.name as pharmacy_name',
                 'pharmacies.address',

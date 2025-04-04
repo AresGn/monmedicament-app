@@ -230,12 +230,14 @@
             @enderror
         </div>
         
+        <!-- Temporairement désactivé en attendant la migration
         <div class="form-group">
             <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}>
                 <label class="custom-control-label" for="remember">Se souvenir de moi</label>
             </div>
         </div>
+        -->
         
         <div class="forgot-password">
             <a href="{{ route('patient.auth.password.request') }}">Mot de passe oublié?</a>
