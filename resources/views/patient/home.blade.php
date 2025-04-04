@@ -744,13 +744,16 @@
     .search-results-container {
         max-width: 1200px;
         margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
     }
 
     .search-results-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
     }
 
     .search-results-header h2 {
@@ -759,7 +762,12 @@
         margin: 0;
     }
 
-    .filter-button {
+    .search-actions {
+        display: flex;
+        gap: 0.75rem;
+    }
+
+    .filter-button, .location-button {
         background: white;
         border: 1px solid #ddd;
         border-radius: 0.25rem;
@@ -771,46 +779,128 @@
         font-size: 0.9rem;
     }
 
-    .filter-button:hover {
+    .filter-button:hover, .location-button:hover {
         background: #f0f0f0;
     }
 
-    .search-results-content {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
+    .map-container {
+        height: 300px;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        width: 100%;
     }
 
-    .pharmacy-list {
+    .pharmacy-results-container {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .pharmacy-results-scroll {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        padding: 0.5rem 0;
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .pharmacy-results-scroll::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .pharmacy-results-scroll::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 8px;
+    }
+
+    .pharmacy-results-scroll::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 8px;
+    }
+
+    .pharmacy-results-scroll::-webkit-scrollbar-thumb:hover {
+        background: #aaa;
+    }
+
+    .pharmacy-card {
         background: white;
         border-radius: 0.5rem;
         box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         padding: 1rem;
-        flex: 1;
+        min-width: 300px;
+        max-width: 300px;
+        border: 1px solid #eee;
+        flex-shrink: 0;
+        cursor: pointer;
+        transition: all 0.3s ease;
     }
 
-    .pharmacy-card {
-        border-bottom: 1px solid #eee;
-        padding: 1rem 0;
-        margin-bottom: 1rem;
+    .pharmacy-card:hover {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transform: translateY(-2px);
     }
 
-    .pharmacy-card:last-child {
-        border-bottom: none;
-        margin-bottom: 0;
+    .pharmacy-card.highlight {
+        border: 2px solid var(--primary);
+        box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.3);
+    }
+    
+    .pharmacy-header {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0.5rem;
     }
 
     .pharmacy-name {
         font-size: 1.1rem;
         font-weight: 600;
         color: var(--primary);
+        margin-bottom: 0.25rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .pharmacy-rating {
+        display: flex;
+        align-items: center;
         margin-bottom: 0.5rem;
+    }
+    
+    .pharmacy-rating .stars {
+        display: flex;
+        color: #FFD700;
+        margin-right: 0.5rem;
+    }
+    
+    .pharmacy-rating .stars i {
+        margin-right: 2px;
+    }
+    
+    .pharmacy-rating .reviews-count {
+        font-size: 0.8rem;
+        color: #666;
+    }
+
+    .pharmacy-distance-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        background: rgba(13, 148, 136, 0.1);
+        color: var(--primary);
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 0.25rem 0.5rem;
+        border-radius: 1rem;
+        margin-bottom: 0.75rem;
     }
 
     .pharmacy-details {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 0.75rem;
+        gap: 0.5rem;
         margin-bottom: 0.75rem;
     }
 
@@ -818,22 +908,29 @@
         display: flex;
         align-items: flex-start;
         gap: 0.5rem;
+        max-width: 100%;
     }
 
     .pharmacy-info-item i {
         color: var(--primary);
         font-size: 0.9rem;
         margin-top: 0.2rem;
+        flex-shrink: 0;
+        width: 12px;
+        text-align: center;
     }
 
-    .pharmacy-distance {
-        font-weight: 500;
-        color: #666;
-    }
-
-    .pharmacy-address, .pharmacy-hours {
-        color: #666;
+    .pharmacy-info-content {
         font-size: 0.9rem;
+        color: #666;
+        white-space: normal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        max-width: calc(100% - 20px);
     }
 
     .medicine-list {
@@ -841,6 +938,22 @@
         border-radius: 0.25rem;
         padding: 0.75rem;
         margin: 0.75rem 0;
+        max-height: 150px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+    }
+
+    .medicine-list::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .medicine-list::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .medicine-list::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 4px;
     }
 
     .medicine-item {
@@ -856,18 +969,20 @@
 
     .medicine-name {
         font-weight: 500;
+        font-size: 0.9rem;
     }
 
     .medicine-price {
         color: var(--primary);
         font-weight: 500;
+        font-size: 0.9rem;
     }
 
     .stock-badge {
         display: inline-block;
-        padding: 0.25rem 0.5rem;
+        padding: 0.15rem 0.4rem;
         border-radius: 1rem;
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         font-weight: 500;
         margin-left: 0.5rem;
     }
@@ -881,18 +996,20 @@
         display: flex;
         gap: 0.5rem;
         margin-top: 1rem;
+        justify-content: space-between;
     }
 
     .btn-action {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 0.5rem 1rem;
+        padding: 0.5rem;
         border-radius: 0.25rem;
         text-decoration: none;
         font-weight: 500;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         transition: all 0.2s;
+        flex: 1;
     }
 
     .btn-details {
@@ -910,11 +1027,100 @@
         transform: translateY(-2px);
     }
 
-    .map-container {
-        height: 300px;
+    .loading, .error, .no-results {
+        padding: 2rem;
+        text-align: center;
+        background: white;
         border-radius: 0.5rem;
-        overflow: hidden;
+        margin: 1rem 0;
+    }
+
+    /* Filters Bar Styles */
+    .filters-bar {
+        background: white;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
         box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .filter-group {
+        margin-bottom: 0.5rem;
+    }
+
+    .filter-group h4 {
+        color: #333;
+        margin: 0 0 0.5rem 0;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    .filter-options.horizontal {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .filter-option {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        cursor: pointer;
+    }
+
+    .filter-label {
+        font-size: 0.85rem;
+        color: #555;
+    }
+
+    .filter-actions {
+        display: flex;
+        gap: 0.5rem;
+        grid-column: 1 / -1;
+        justify-content: flex-end;
+        margin-top: 0.5rem;
+    }
+
+    .btn-apply-filters, .btn-reset-filters {
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        font-weight: 500;
+        cursor: pointer;
+        text-align: center;
+        border: none;
+        transition: all 0.2s;
+        font-size: 0.9rem;
+    }
+
+    .btn-apply-filters {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-apply-filters:hover {
+        background-color: #0069d9;
+    }
+
+    .btn-reset-filters {
+        background-color: white;
+        color: #333;
+        border: 1px solid #ddd;
+    }
+
+    .btn-reset-filters:hover {
+        background-color: #f8f9fa;
+    }
+
+    .search-input {
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        border: 1px solid #ddd;
+        font-size: 0.9rem;
+        background-color: white;
+        min-width: 200px;
     }
 
     /* Tablet and Desktop styles */
@@ -927,32 +1133,18 @@
             font-size: 1.5rem;
         }
 
-        .search-results-content {
-            flex-direction: row;
-            gap: 2rem;
-        }
-
-        .pharmacy-list {
-            max-width: 60%;
-            padding: 1.5rem;
-        }
-
         .map-container {
-            flex: 1;
-            height: auto;
-            min-height: 500px;
+            height: 400px;
         }
 
-        .pharmacy-details {
-            grid-template-columns: repeat(2, 1fr);
+        .pharmacy-results-scroll {
+            gap: 1.5rem;
+            padding: 0.5rem;
         }
 
-        .pharmacy-actions {
-            justify-content: flex-start;
-        }
-
-        .btn-action {
-            padding: 0.5rem 1.25rem;
+        .pharmacy-card {
+            min-width: 350px;
+            max-width: 350px;
         }
     }
 </style>
@@ -1006,20 +1198,119 @@
         <div class="search-results-container">
             <div class="search-results-header">
                 <h2>Résultats de recherche</h2>
-                <button id="filtersButton" class="filter-button">Filtres</button>
+                <div class="search-actions">
+                    <button id="locationButton" class="location-button">
+                        <i class="fas fa-location-arrow"></i> Ma position
+                    </button>
+                    <input type="text" id="searchQuery" class="search-input" value="Paracetamole 500Mg" readonly>
+                </div>
             </div>
 
-            <div class="search-results-content">
-                <!-- Left Column: Pharmacy List -->
-                <div class="pharmacy-list">
-                    <div id="pharmacyResults">
-                        <!-- Pharmacy results will be populated here dynamically -->
+            <!-- Filters Bar -->
+            <div class="filters-bar">
+                <div class="filter-group">
+                    <h4>Distance</h4>
+                    <div class="filter-options horizontal">
+                        <label class="filter-option">
+                            <input type="radio" name="distance" value="all" checked>
+                            <span class="filter-label">Toutes</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="distance" value="lt1">
+                            <span class="filter-label">- de 1 km</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="distance" value="1-3">
+                            <span class="filter-label">1-3 km</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="distance" value="3-5">
+                            <span class="filter-label">3-5 km</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="distance" value="5-10">
+                            <span class="filter-label">5-10 km</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Disponibilité</h4>
+                    <div class="filter-options horizontal">
+                        <label class="filter-option">
+                            <input type="radio" name="availability" value="all" checked>
+                            <span class="filter-label">Toutes</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="availability" value="in_stock">
+                            <span class="filter-label">En stock</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="availability" value="limited_stock">
+                            <span class="filter-label">Stock limité</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Horaires</h4>
+                    <div class="filter-options horizontal">
+                        <label class="filter-option">
+                            <input type="radio" name="hours" value="all" checked>
+                            <span class="filter-label">Toutes</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="hours" value="open_now">
+                            <span class="filter-label">Ouvert maintenant</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="hours" value="open_24_7">
+                            <span class="filter-label">Ouvert 24/7</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="hours" value="open_sunday">
+                            <span class="filter-label">Ouvert le dimanche</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Services</h4>
+                    <div class="filter-options horizontal">
+                        <label class="filter-option">
+                            <input type="radio" name="services" value="all" checked>
+                            <span class="filter-label">Toutes</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="services" value="click_collect">
+                            <span class="filter-label">Click & Collect</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="services" value="delivery">
+                            <span class="filter-label">Livraison</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="services" value="card_payment">
+                            <span class="filter-label">Paiement CB</span>
+                        </label>
                     </div>
                 </div>
                 
-                <!-- Right Column: Map -->
-                <div class="map-container">
-                    <div id="resultsMap" style="width: 100%; height: 100%;"></div>
+                <div class="filter-actions">
+                    <button id="applyFilters" class="btn-apply-filters">Appliquer</button>
+                    <button id="resetFilters" class="btn-reset-filters">Réinitialiser</button>
+                </div>
+            </div>
+
+            <!-- Top: Map Container -->
+            <div class="map-container">
+                <div id="resultsMap" style="width: 100%; height: 100%;"></div>
+            </div>
+            
+            <!-- Bottom: Pharmacy Results (Horizontal) -->
+            <div class="pharmacy-results-container">
+                <div id="pharmacyResults" class="pharmacy-results-scroll">
+                    <!-- Pharmacy results will be populated here dynamically -->
                 </div>
             </div>
         </div>
@@ -1178,8 +1469,12 @@
         const searchResultsSection = document.getElementById('searchResultsSection');
         const pharmacyResults = document.getElementById('pharmacyResults');
         const filtersButton = document.getElementById('filtersButton');
+        const locationButton = document.getElementById('locationButton');
+        
         let map = null;
         let markers = [];
+        let userMarker = null;
+        let userLocation = null;
 
         // Initialize the map
         function initMap() {
@@ -1200,6 +1495,147 @@
             }
         }
 
+        // Calculate distance between two coordinates in kilometers
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Radius of the earth in km
+            const dLat = deg2rad(lat2 - lat1);
+            const dLon = deg2rad(lon2 - lon1);
+            const a = 
+                Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+                Math.sin(dLon/2) * Math.sin(dLon/2); 
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+            const distance = R * c; // Distance in km
+            return distance;
+        }
+
+        function deg2rad(deg) {
+            return deg * (Math.PI/180);
+        }
+
+        // Format distance for display
+        function formatDistance(distance) {
+            if (distance < 1) {
+                return `${Math.round(distance * 1000)} m`;
+            } else {
+                return `${distance.toFixed(1)} km`;
+            }
+        }
+
+        // Generate star rating HTML
+        function generateStarRating(rating, reviewCount) {
+            const fullStars = Math.floor(rating);
+            const halfStar = rating % 1 >= 0.5;
+            const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+            
+            let starsHtml = '';
+            
+            // Add full stars
+            for (let i = 0; i < fullStars; i++) {
+                starsHtml += '<i class="fas fa-star"></i>';
+            }
+            
+            // Add half star if needed
+            if (halfStar) {
+                starsHtml += '<i class="fas fa-star-half-alt"></i>';
+            }
+            
+            // Add empty stars
+            for (let i = 0; i < emptyStars; i++) {
+                starsHtml += '<i class="far fa-star"></i>';
+            }
+            
+            return `<div class="stars">${starsHtml}</div><span class="reviews-count">(${reviewCount} avis)</span>`;
+        }
+
+        // Get user location
+        function getUserLocation() {
+            if (navigator.geolocation) {
+                locationButton.disabled = true;
+                locationButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Localisation...';
+                
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        userLocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        
+                        // Update map with user location
+                        if (map) {
+                            if (userMarker) {
+                                map.removeLayer(userMarker);
+                            }
+                            
+                            // Create a custom icon for user location
+                            const userIcon = L.divIcon({
+                                className: 'user-location-marker',
+                                html: '<div style="background-color: #0EA5E9; width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.3);"></div>',
+                                iconSize: [22, 22],
+                                iconAnchor: [11, 11]
+                            });
+                            
+                            userMarker = L.marker([userLocation.lat, userLocation.lng], {icon: userIcon})
+                                .addTo(map)
+                                .bindPopup("Votre position")
+                                .openPopup();
+                            
+                            // Center map on user location
+                            map.setView([userLocation.lat, userLocation.lng], 13);
+                            
+                            // Update distances if we have pharmacy results
+                            if (pharmacyResults.children.length > 0 && pharmacyResults.querySelector('.pharmacy-card')) {
+                                updateDistancesInResults();
+                            }
+                        }
+                        
+                        locationButton.disabled = false;
+                        locationButton.innerHTML = '<i class="fas fa-location-arrow"></i> Ma position';
+                    },
+                    (error) => {
+                        console.error("Erreur de géolocalisation:", error);
+                        locationButton.disabled = false;
+                        locationButton.innerHTML = '<i class="fas fa-location-arrow"></i> Ma position';
+                        alert('Impossible de déterminer votre position. Veuillez vérifier que vous avez autorisé l\'accès à votre localisation.');
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 5000,
+                        maximumAge: 0
+                    }
+                );
+            } else {
+                alert("La géolocalisation n'est pas prise en charge par votre navigateur.");
+            }
+        }
+
+        // Update distances in the results based on user location
+        function updateDistancesInResults() {
+            if (!userLocation) return;
+            
+            const pharmacyCards = document.querySelectorAll('.pharmacy-card');
+            const distances = [];
+            
+            pharmacyCards.forEach(card => {
+                const lat = parseFloat(card.dataset.lat);
+                const lng = parseFloat(card.dataset.lng);
+                
+                if (!isNaN(lat) && !isNaN(lng)) {
+                    const distance = calculateDistance(userLocation.lat, userLocation.lng, lat, lng);
+                    distances.push({ card, distance });
+                    
+                    // Update distance display in the card
+                    const distanceTag = card.querySelector('.pharmacy-distance-tag');
+                    if (distanceTag) {
+                        distanceTag.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${formatDistance(distance)}`;
+                    }
+                }
+            });
+            
+            // Sort cards by distance if user requests
+            // This is optional and can be triggered by a sort button
+        }
+
         // Add markers for pharmacies to the map
         function addPharmacyMarkers(pharmacies) {
             clearMarkers();
@@ -1213,6 +1649,26 @@
                             ${pharmacy.address}<br>
                             <a href="tel:${pharmacy.phone_number}">${pharmacy.phone_number}</a>
                         `);
+                    
+                    // Store pharmacy id in the marker for reference
+                    marker.pharmacyId = pharmacy.id;
+                    
+                    // When clicking on a marker, highlight the corresponding card
+                    marker.on('click', function() {
+                        const card = document.querySelector(`.pharmacy-card[data-id="${pharmacy.id}"]`);
+                        if (card) {
+                            // Remove highlight from all cards
+                            document.querySelectorAll('.pharmacy-card').forEach(c => {
+                                c.classList.remove('highlight');
+                            });
+                            
+                            // Add highlight to clicked pharmacy card
+                            card.classList.add('highlight');
+                            
+                            // Scroll the card into view
+                            card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                        }
+                    });
                     
                     markers.push(marker);
                 }
@@ -1252,25 +1708,41 @@
                     `;
                 });
                 
+                // Calculate distance if user location is available
+                let distanceHtml = '';
+                if (userLocation && pharmacy.latitude && pharmacy.longitude) {
+                    const distance = calculateDistance(
+                        userLocation.lat, 
+                        userLocation.lng, 
+                        parseFloat(pharmacy.latitude), 
+                        parseFloat(pharmacy.longitude)
+                    );
+                    distanceHtml = `<div class="pharmacy-distance-tag"><i class="fas fa-map-marker-alt"></i> ${formatDistance(distance)}</div>`;
+                } else {
+                    distanceHtml = `<div class="pharmacy-distance-tag"><i class="fas fa-map-marker-alt"></i> Distance inconnue</div>`;
+                }
+                
                 html += `
-                    <div class="pharmacy-card">
-                        <h3 class="pharmacy-name">${pharmacy.name}</h3>
+                    <div class="pharmacy-card" data-id="${pharmacy.id}" data-lat="${pharmacy.latitude}" data-lng="${pharmacy.longitude}">
+                        <div class="pharmacy-header">
+                            <h3 class="pharmacy-name">${pharmacy.name}</h3>
+                            <div class="pharmacy-rating">
+                                ${generateStarRating(4.5, pharmacy.reviews_count || 128)}
+                            </div>
+                        </div>
+                        ${distanceHtml}
                         <div class="pharmacy-details">
                             <div class="pharmacy-info-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span class="pharmacy-distance">À 800m</span>
-                            </div>
-                            <div class="pharmacy-info-item">
                                 <i class="fas fa-location-arrow"></i>
-                                <span class="pharmacy-address">${pharmacy.address}</span>
+                                <div class="pharmacy-info-content">${pharmacy.address}</div>
                             </div>
                             <div class="pharmacy-info-item">
                                 <i class="fas fa-clock"></i>
-                                <span class="pharmacy-hours">Ouvert jusqu'à 20h00</span>
+                                <div class="pharmacy-info-content">Ouvert jusqu'à 20h00</div>
                             </div>
                             <div class="pharmacy-info-item">
                                 <i class="fas fa-phone"></i>
-                                <span class="pharmacy-phone">${pharmacy.phone_number}</span>
+                                <div class="pharmacy-info-content">${pharmacy.phone_number}</div>
                             </div>
                         </div>
                         
@@ -1279,11 +1751,11 @@
                         </div>
                         
                         <div class="pharmacy-actions">
-                            <a href="${pharmacy.id}" class="btn-action btn-details">
-                                <i class="fas fa-info-circle mr-1"></i> Détails
+                            <a href="/patient/pharmacy/${pharmacy.id}" class="btn-action btn-details">
+                                <i class="fas fa-info-circle"></i> Détails
                             </a>
-                            <a href="${pharmacy.id}" class="btn-action btn-reserve">
-                                <i class="fas fa-calendar-check mr-1"></i> Réserver
+                            <a href="/reservations/create?pharmacy_id=${pharmacy.id}" class="btn-action btn-reserve">
+                                <i class="fas fa-calendar-check"></i> Réserver
                             </a>
                         </div>
                     </div>
@@ -1291,6 +1763,29 @@
             });
             
             pharmacyResults.innerHTML = html;
+            
+            // Add click events to pharmacy cards
+            document.querySelectorAll('.pharmacy-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Don't trigger if clicking on a button or link
+                    if (e.target.closest('a')) return;
+                    
+                    const pharmacyId = this.dataset.id;
+                    const marker = markers.find(m => m.pharmacyId == pharmacyId);
+                    
+                    if (marker) {
+                        // Center map on this pharmacy
+                        map.setView(marker.getLatLng(), 15);
+                        marker.openPopup();
+                        
+                        // Highlight this card
+                        document.querySelectorAll('.pharmacy-card').forEach(c => {
+                            c.classList.remove('highlight');
+                        });
+                        this.classList.add('highlight');
+                    }
+                });
+            });
         }
 
         // Perform the search and show results
@@ -1308,6 +1803,12 @@
                 .then(data => {
                     renderPharmacyResults(data.pharmacies);
                     addPharmacyMarkers(data.pharmacies);
+                    
+                    // Request user location after results are loaded
+                    if (!userLocation) {
+                        // Ask for location after results are shown (optional)
+                        // You could also automatically request it or wait for user to click button
+                    }
                     
                     // Scroll to results
                     searchResultsSection.scrollIntoView({ behavior: 'smooth' });
@@ -1335,6 +1836,12 @@
             }
             
             if (query) {
+                // Set the query in the results section
+                const searchQueryInput = document.getElementById('searchQuery');
+                if (searchQueryInput) {
+                    searchQueryInput.value = query;
+                }
+                
                 performSearch(query);
             } else if (hasFile) {
                 // Handle file upload - not implemented in this version
@@ -1342,10 +1849,126 @@
             }
         });
 
-        // Filters button functionality (to be implemented later)
-        if (filtersButton) {
-            filtersButton.addEventListener('click', function() {
-                alert('Les filtres seront disponibles prochainement.');
+        // Apply filters
+        const applyFiltersButton = document.getElementById('applyFilters');
+        if (applyFiltersButton) {
+            applyFiltersButton.addEventListener('click', function() {
+                // Get selected filters
+                const distance = document.querySelector('input[name="distance"]:checked').value;
+                const availability = document.querySelector('input[name="availability"]:checked').value;
+                const hours = document.querySelector('input[name="hours"]:checked').value;
+                const services = document.querySelector('input[name="services"]:checked').value;
+
+                // Apply filters to results
+                applyFiltersToResults(distance, availability, hours, services);
+            });
+        }
+
+        // Reset filters
+        const resetFiltersButton = document.getElementById('resetFilters');
+        if (resetFiltersButton) {
+            resetFiltersButton.addEventListener('click', function() {
+                // Reset all radio buttons to "Toutes"
+                document.querySelector('input[name="distance"][value="all"]').checked = true;
+                document.querySelector('input[name="availability"][value="all"]').checked = true;
+                document.querySelector('input[name="hours"][value="all"]').checked = true;
+                document.querySelector('input[name="services"][value="all"]').checked = true;
+
+                // Reset filters
+                applyFiltersToResults('all', 'all', 'all', 'all');
+            });
+        }
+
+        // Function to apply filters to results
+        function applyFiltersToResults(distance, availability, hours, services) {
+            console.log('Applying filters:', { distance, availability, hours, services });
+            
+            // For now, just log the filters
+            // This would filter the pharmacy cards based on the selected criteria
+            
+            // Example implementation (to be completed with actual filtering logic):
+            const pharmacyCards = document.querySelectorAll('.pharmacy-card');
+            
+            pharmacyCards.forEach(card => {
+                let visible = true;
+                
+                // Filter by distance
+                if (distance !== 'all' && userLocation) {
+                    const lat = parseFloat(card.dataset.lat);
+                    const lng = parseFloat(card.dataset.lng);
+                    
+                    if (!isNaN(lat) && !isNaN(lng)) {
+                        const distanceInKm = calculateDistance(
+                            userLocation.lat, 
+                            userLocation.lng, 
+                            lat, 
+                            lng
+                        );
+                        
+                        switch (distance) {
+                            case 'lt1':
+                                visible = distanceInKm < 1;
+                                break;
+                            case '1-3':
+                                visible = distanceInKm >= 1 && distanceInKm <= 3;
+                                break;
+                            case '3-5':
+                                visible = distanceInKm >= 3 && distanceInKm <= 5;
+                                break;
+                            case '5-10':
+                                visible = distanceInKm >= 5 && distanceInKm <= 10;
+                                break;
+                        }
+                    }
+                }
+                
+                // For now, we'll just hide/show based on distance
+                // Additional filtering logic would go here
+                
+                // Apply visibility
+                card.style.display = visible ? '' : 'none';
+            });
+            
+            // Update map markers to match filtered results
+            updateMapMarkersVisibility();
+        }
+        
+        // Update map markers to match filtered results
+        function updateMapMarkersVisibility() {
+            if (!map || !markers.length) return;
+            
+            const visiblePharmacyIds = Array.from(document.querySelectorAll('.pharmacy-card:not([style*="display: none"])'))
+                .map(card => card.dataset.id);
+            
+            markers.forEach(marker => {
+                if (visiblePharmacyIds.includes(marker.pharmacyId)) {
+                    // Show marker if not already on map
+                    if (!map.hasLayer(marker)) {
+                        marker.addTo(map);
+                    }
+                } else {
+                    // Hide marker if on map
+                    if (map.hasLayer(marker)) {
+                        map.removeLayer(marker);
+                    }
+                }
+            });
+            
+            // If we have visible markers, fit the map to show them
+            const visibleMarkers = markers.filter(marker => 
+                visiblePharmacyIds.includes(marker.pharmacyId)
+            );
+            
+            if (visibleMarkers.length > 0) {
+                const group = new L.featureGroup(visibleMarkers);
+                map.fitBounds(group.getBounds().pad(0.1));
+            }
+        }
+
+        // Location button functionality
+        if (locationButton) {
+            locationButton.addEventListener('click', function() {
+                getUserLocation();
             });
         }
 

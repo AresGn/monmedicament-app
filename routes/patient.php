@@ -53,11 +53,15 @@ Route::get('/privacy', function () {
 })->name('privacy');
 
 // Medicine search routes (no authentication required)
+Route::get('/patient/search/index', [MedicineSearchController::class, 'index'])->name('patient.search.index');
 Route::get('/patient/search', [MedicineSearchController::class, 'search'])->name('patient.search.results');
 Route::post('/patient/search', [MedicineSearchController::class, 'search'])->name('patient.search.results');
 Route::get('/patient/pharmacies', [MedicineSearchController::class, 'pharmacyList'])->name('patient.search.pharmacy.list');
 Route::get('/patient/pharmacy/details/{id}', [MedicineSearchController::class, 'pharmacyDetails'])->name('patient.search.pharmacy.details');
 Route::get('/patient/pharmacy/{id}', [MedicineSearchController::class, 'pharmacyDetails'])->name('patient.search.pharmacy');
+
+// Reservation create route (pas besoin d'authentification)
+Route::get('/reservations/create', [ReservationController::class, 'create'])->name('patient.reservations.create');
 
 // Routes requiring patient authentication
 Route::middleware(['auth', 'patient'])->prefix('patient')->name('patient.')->group(function () {
@@ -70,7 +74,6 @@ Route::middleware(['auth', 'patient'])->prefix('patient')->name('patient.')->gro
 
     // Reservation routes
     Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
-    Route::get('/reservations/create', [ReservationController::class, 'create'])->name('reservations.create');
     Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
     Route::get('/reservations/{id}', [ReservationController::class, 'show'])->name('reservations.show');
     Route::post('/reservations/{id}/cancel', [ReservationController::class, 'cancel'])->name('reservations.cancel');

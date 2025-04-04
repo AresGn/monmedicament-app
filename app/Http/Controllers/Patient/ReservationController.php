@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Patient;
 use App\Http\Controllers\Controller;
 use App\Models\Medicine;
 use App\Models\Pharmacy;
+use App\Models\PharmacyInventory;
 use App\Models\Reservation;
 use App\Models\ReservationItem;
 use Illuminate\Http\Request;

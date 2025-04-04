@@ -44,7 +44,6 @@ Route::prefix('patient')->name('patient.')->group(function () {
     Route::middleware(['auth', 'patient'])->group(function () {
         // Reservation routes
         Route::get('/reservations', [PatientReservationController::class, 'index'])->name('reservations.index');
-        Route::get('/reservations/create', [PatientReservationController::class, 'create'])->name('reservations.create');
         Route::post('/reservations', [PatientReservationController::class, 'store'])->name('reservations.store');
         Route::get('/reservations/{id}', [PatientReservationController::class, 'show'])->name('reservations.show');
         Route::post('/reservations/{id}/cancel', [PatientReservationController::class, 'cancel'])->name('reservations.cancel');
