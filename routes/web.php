@@ -40,6 +40,12 @@ Route::prefix('patient')->name('patient.')->group(function () {
     Route::get('/pharmacies', [MedicineSearchController::class, 'pharmacyList'])->name('search.pharmacy.list');
     Route::get('/pharmacy/{id}', [MedicineSearchController::class, 'pharmacyDetails'])->name('search.pharmacy.details');
     
+    // Reservation verification (no authentication required)
+    Route::get('/reservations/verify', [PatientReservationController::class, 'verify'])->name('reservations.verify');
+    
+    // Reservation confirmation (no authentication required)
+    Route::get('/reservations/confirm', [PatientReservationController::class, 'confirm'])->name('reservations.confirm');
+    
     // Routes requiring patient authentication
     Route::middleware(['auth', 'patient'])->group(function () {
         // Reservation routes

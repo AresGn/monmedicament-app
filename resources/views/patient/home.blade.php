@@ -171,32 +171,40 @@
     }
 
     .upload-btn {
-        display: flex;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 0.5rem;
-        padding: 0.75rem 1rem;
+        padding: 0.5rem 1rem;
+        border: none;
         border-radius: 0.25rem;
-        cursor: pointer;
-        transition: all 0.3s;
-        font-weight: 600;
         font-size: 0.9rem;
-        width: 100%;
-    }
-
-    .upload-btn:first-child {
-        background: #0D9488;
+        font-weight: 600;
+        background-color: var(--primary);
         color: white;
-    }
-
-    .camera-btn {
-        background: #0EA5E9;
-        color: white;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: center;
     }
 
     .upload-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        background-color: #1e40af;
+    }
+
+    .camera-btn {
+        background-color: #2563eb;
+    }
+
+    .camera-btn:hover {
+        background-color: #1d4ed8;
+    }
+
+    .reset-btn {
+        background-color: #dc2626;
+    }
+
+    .reset-btn:hover {
+        background-color: #b91c1c;
     }
 
     .file-formats {
@@ -782,6 +790,15 @@
             width: 100%;
             max-width: 100%;
         }
+        
+        .search-btn-container {
+            margin-top: 1rem;
+        }
+        
+        .search-button-main {
+            width: 100%;
+            padding: 0.75rem 1rem;
+        }
     }
 
     /* Search Results Styles */
@@ -1198,6 +1215,360 @@
             max-width: 350px;
         }
     }
+
+    /* Notifications styles */
+    .notification {
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        position: relative;
+    }
+
+    .notification h3 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+    }
+
+    .notification p {
+        margin-bottom: 0.5rem;
+    }
+
+    .notification.success {
+        background-color: #d1fae5;
+        border-left: 4px solid #10b981;
+    }
+    
+    .notification.info {
+        background-color: #dbeafe;
+        border-left: 4px solid #3b82f6;
+    }
+
+    .notification.warning {
+        background-color: #fef3c7;
+        border-left: 4px solid #f59e0b;
+    }
+
+    .notification.error {
+        background-color: #fee2e2;
+        border-left: 4px solid #ef4444;
+    }
+    
+    /* Medicine not found styles */
+    .medicine-not-found {
+        margin-top: 1rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid rgba(59, 130, 246, 0.2);
+    }
+    
+    .medicine-not-found ul {
+        margin-top: 0.5rem;
+        padding-left: 1.25rem;
+    }
+    
+    .medicine-not-found li {
+        margin-bottom: 0.25rem;
+        font-size: 0.9rem;
+    }
+
+    /* Identified medicines list */
+    .identified-medicines-list {
+        margin: 0.5rem 0;
+        padding-left: 1.5rem;
+    }
+
+    .identified-medicines-list li {
+        margin-bottom: 0.25rem;
+    }
+
+    .medicines-identified {
+        background-color: #dbeafe;
+        border-left: 4px solid #3b82f6;
+    }
+
+    /* Loading state */
+    .loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 3rem 1rem;
+        text-align: center;
+        color: #6b7280;
+    }
+
+    .loading:before {
+        content: '';
+        width: 40px;
+        height: 40px;
+        margin-bottom: 1rem;
+        border: 4px solid #e5e7eb;
+        border-top-color: #3b82f6;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    /* File upload styles */
+    .drop-area.file-selected {
+        border-color: var(--primary);
+        background-color: rgba(59, 130, 246, 0.05);
+    }
+
+    .drop-area.file-selected .drop-icon i {
+        color: var(--primary);
+        font-size: 2.2rem;
+    }
+    
+    .search-btn-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 1.5rem;
+    }
+    
+    .search-button-main {
+        background: var(--secondary);
+        color: var(--white);
+        border: none;
+        border-radius: 0.5rem;
+        padding: 0.75rem 2rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-size: 1rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        min-width: 200px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .search-button-main:hover {
+        background-color: #1e7e34;
+        transform: translateY(-2px);
+    }
+    
+    @media (min-width: 768px) {
+        .search-button-main {
+            padding: 1rem 3rem;
+            font-size: 1.1rem;
+            min-width: 250px;
+        }
+    }
+    
+    /* Animation de pulsation pour attirer l'attention */
+    @keyframes pulsate {
+        0% {
+            transform: scale(1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        50% {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        100% {
+            transform: scale(1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+    }
+    
+    .search-button-main.pulsate {
+        animation: pulsate 1.5s infinite;
+        background-color: #1e7e34;
+    }
+
+    /* Error help styles */
+    .error-help {
+        margin-top: 1rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid rgba(239, 68, 68, 0.2);
+    }
+    
+    .error-help ul {
+        margin-top: 0.5rem;
+        padding-left: 1.25rem;
+    }
+    
+    .error-help li {
+        margin-bottom: 0.25rem;
+        font-size: 0.9rem;
+    }
+
+    /* Empty results styles */
+    .empty-results {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 3rem 1rem;
+        text-align: center;
+        color: #6b7280;
+        background-color: #f9fafb;
+        border-radius: 0.5rem;
+        margin: 1rem 0;
+    }
+    
+    .empty-results i {
+        font-size: 3rem;
+        color: #d1d5db;
+        margin-bottom: 1rem;
+    }
+    
+    .empty-results h3 {
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+        color: #374151;
+    }
+    
+    .empty-results p {
+        margin-bottom: 0.5rem;
+        max-width: 500px;
+    }
+
+    /* Loading indicators with different styles for the two cases */
+    .loading.analysis {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        text-align: center;
+        color: var(--primary);
+        background-color: rgba(14, 165, 233, 0.05);
+        border-radius: 0.5rem;
+        border: 1px dashed var(--primary);
+    }
+
+    .loading.analysis i {
+        color: var(--primary);
+        font-size: 2rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .loading.search {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        text-align: center;
+        color: var(--secondary);
+        background-color: rgba(34, 197, 94, 0.05);
+        border-radius: 0.5rem;
+        border: 1px dashed var(--secondary);
+    }
+
+    .loading.search i {
+        color: var(--secondary);
+        font-size: 2rem;
+        margin-bottom: 0.75rem;
+    }
+
+    /* Styles for transition message */
+    .loading.transition {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        text-align: center;
+        color: #6366f1;
+        background-color: rgba(99, 102, 241, 0.05);
+        border-radius: 0.5rem;
+        border: 1px dashed #6366f1;
+    }
+
+    .loading.transition i {
+        color: #6366f1;
+        font-size: 2rem;
+        margin-bottom: 0.75rem;
+    }
+
+    /* Animation for loading icons */
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .loading i.fa-sync {
+        animation: spin 2s linear infinite;
+    }
+
+    .loading i.fa-spinner {
+        animation: spin 1s linear infinite;
+    }
+
+    .loading.analysis i, .loading.search i, .loading.transition i {
+        color: inherit;
+        font-size: 1.5rem;
+        margin-right: 0.5rem;
+    }
+
+    .loading.analysis, .loading.search, .loading.transition {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        text-align: center;
+        border-radius: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .loading.analysis {
+        color: var(--primary);
+        background-color: rgba(14, 165, 233, 0.05);
+        border: 1px dashed var(--primary);
+    }
+
+    .loading.search {
+        color: var(--secondary);
+        background-color: rgba(34, 197, 94, 0.05);
+        border: 1px dashed var(--secondary);
+    }
+
+    .loading.transition {
+        color: #6366f1;
+        background-color: rgba(99, 102, 241, 0.05);
+        border: 1px dashed #6366f1;
+    }
+
+    /* Loading text styling */
+    .loading-text {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        flex: 1;
+        margin: 0 1rem;
+    }
+
+    .loading-text span {
+        font-weight: 500;
+        margin-bottom: 0.25rem;
+    }
+
+    .loading-text small {
+        font-size: 0.8rem;
+        opacity: 0.8;
+    }
+
+    .loading i.fa-spinner, .loading i.fa-sync {
+        animation: spin 1s linear infinite;
+    }
+
+    .loading i {
+        flex-shrink: 0;
+    }
 </style>
 @endpush
 
@@ -1209,8 +1580,7 @@
             <form action="#" method="GET" class="search-bar" enctype="multipart/form-data">
                 <div class="search-options">
                     <div class="search-input-container">
-                        <input type="text" name="query" id="searchInput" placeholder="Entrez les noms de vos médicaments (Ex: Paracétamol 200mg)..." required>
-                        <button type="submit" class="search-button">Rechercher</button>
+                        <input type="text" name="query" id="searchInput" placeholder="Entrez les noms de vos médicaments (Ex: Paracétamol 200mg)...">
                         <div id="autocompleteContainer" class="autocomplete-container"></div>
                     </div>
 
@@ -1234,11 +1604,21 @@
                                     <i class="fas fa-camera"></i>
                                     Prendre en photo
                                 </label>
+                                <button type="button" id="resetUpload" class="upload-btn reset-btn" style="display: none;">
+                                    <i class="fas fa-times"></i>
+                                    Annuler
+                                </button>
                             </div>
                             <input type="file" id="fileUpload" name="ordonnance" accept=".jpg,.jpeg,.png,.pdf" style="display: none;">
                             <input type="file" id="cameraCapture" name="ordonnance" accept="image/*" capture="camera" style="display: none;">
                             <p class="file-formats">Formats acceptés : JPG, PNG, PDF - Max 10MB</p>
                         </div>
+                    </div>
+                    
+                    <div class="search-btn-container">
+                        <button type="submit" class="search-button-main">
+                            <i class="fas fa-search"></i> Rechercher
+                        </button>
                     </div>
                 </div>
             </form>
@@ -1899,10 +2279,13 @@
 
         // Render pharmacy results in HTML
         function renderPharmacyResults(pharmacies) {
-            if (pharmacies.length === 0) {
+            if (!pharmacies || pharmacies.length === 0) {
                 pharmacyResults.innerHTML = `
-                    <div class="no-results">
-                        <p>Aucun résultat trouvé pour cette recherche.</p>
+                    <div class="empty-results">
+                        <i class="fas fa-search"></i>
+                        <h3>Aucun résultat trouvé</h3>
+                        <p>Aucune pharmacie n'a les médicaments recherchés en stock dans votre région.</p>
+                        <p>Essayez d'élargir votre recherche ou contactez directement une pharmacie proche.</p>
                     </div>
                 `;
                 return;
@@ -2006,12 +2389,8 @@
 
         // Perform the search and show results
         function performSearch(query) {
-            // Show loading state
-            pharmacyResults.innerHTML = '<div class="loading">Recherche en cours...</div>';
-            searchResultsSection.style.display = 'block';
-            
-            // Initialize map
-            initMap();
+            // Store the search query in localStorage for use in the verification page
+            localStorage.setItem('lastMedicineSearch', query);
             
             // AJAX request to get search results
             fetch(`/api/medicines/search?query=${encodeURIComponent(query)}`)
@@ -2025,14 +2404,12 @@
                         // Ask for location after results are shown (optional)
                         // You could also automatically request it or wait for user to click button
                     }
-                    
-                    // Scroll to results
-                    searchResultsSection.scrollIntoView({ behavior: 'smooth' });
                 })
                 .catch(error => {
                     console.error('Error fetching search results:', error);
                     pharmacyResults.innerHTML = `
-                        <div class="error">
+                        <div class="notification error">
+                            <h3>Erreur lors de la recherche</h3>
                             <p>Une erreur s'est produite lors de la recherche. Veuillez réessayer.</p>
                         </div>
                     `;
@@ -2047,21 +2424,372 @@
             
             if (!query && !hasFile) {
                 alert('Veuillez entrer le nom d\'un médicament ou importer une ordonnance.');
+                // Mettre en évidence les deux options
                 searchInput.focus();
+                dropArea.classList.add('dragover');
+                setTimeout(() => {
+                    dropArea.classList.remove('dragover');
+                }, 1000);
                 return;
             }
             
-            if (query) {
-                // Set the query in the results section
+            // Show loading state
+            searchResultsSection.style.display = 'block';
+            searchResultsSection.scrollIntoView({ behavior: 'smooth' });
+            
+            // Initialize map if not already initialized
+            if (!map) {
+                initMap();
+            }
+            
+            if (hasFile) {
+                // CAS 1: TÉLÉCHARGEMENT D'ORDONNANCE
+                // Traitement de l'upload d'ordonnance pour identifier les médicaments
+                // Afficher le message spécifique pour l'analyse d'ordonnance
+                pharmacyResults.innerHTML = `
+                    <div class="loading analysis">
+                        <i class="fas fa-file-medical"></i>
+                        <div class="loading-text">
+                            <span>Analyse de l'ordonnance en cours...</span>
+                            <small>Identification des médicaments prescrits</small>
+                        </div>
+                        <i class="fas fa-spinner"></i>
+                    </div>
+                `;
+                
+                const file = fileUpload.files.length > 0 ? fileUpload.files[0] : cameraCapture.files[0];
+                
+                // Préparer les données pour l'API
+                const formData = new FormData();
+                formData.append('ordonnance', file);
+                
+                // Appel API pour l'analyse de l'ordonnance
+                fetch('/api/prescription/analyze', {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Si on a des médicaments ou un contenu brut, on les traite
+                        if ((data.medicines && data.medicines.length > 0) || data.raw_content) {
+                            let medicines = data.medicines || [];
+                            
+                            // Si on a du contenu brut qui semble être du JSON, on essaie de le parser
+                            if (data.raw_content && !medicines.length) {
+                                try {
+                                    const parsedContent = JSON.parse(data.raw_content);
+                                    if (Array.isArray(parsedContent) && parsedContent.length > 0) {
+                                        medicines = parsedContent;
+                                    }
+                                } catch (e) {
+                                    console.log('Impossible de parser le contenu JSON:', e);
+                                }
+                            }
+                            
+                            if (medicines && medicines.length > 0) {
+                                // Construction de la requête à partir des médicaments identifiés
+                                const medicinesQuery = medicines.map(med => {
+                                    if (med.nom && med.dosage) {
+                                        return `${med.nom} ${med.dosage}`;
+                                    } else if (med.nom) {
+                                        return med.nom;
+                                    }
+                                    return '';
+                                }).filter(item => item).join(', ');
+                                
+                                // Mettre à jour le champ de recherche
+                                searchInput.value = medicinesQuery;
+                                
+                                // Mettre à jour le champ dans les résultats
+                                const searchQueryInput = document.getElementById('searchQuery');
+                                if (searchQueryInput) {
+                                    searchQueryInput.value = medicinesQuery;
+                                }
+                                
+                                // Lancer la recherche avec les médicaments identifiés
+                                // Afficher un message de transition avant de lancer la recherche
+                                pharmacyResults.innerHTML = `
+                                    <div class="loading transition">
+                                        <i class="fas fa-sync"></i>
+                                        <div class="loading-text">
+                                            <span>Recherche de pharmacies avec les médicaments identifiés...</span>
+                                            <small>Nous cherchons les pharmacies proches ayant ces médicaments en stock</small>
+                                        </div>
+                                    </div>
+                                `;
+                                
+                                // Lancer la recherche après un court délai pour montrer le message de transition
+                                setTimeout(() => {
+                                    performSearch(medicinesQuery);
+                                    // Afficher les médicaments identifiés
+                                    showIdentifiedMedicines(medicines, data.message);
+                                }, 500);
+                            } else {
+                                // Aucun médicament identifié
+                                pharmacyResults.innerHTML = `
+                                    <div class="notification warning">
+                                        <h3>Aucun médicament identifié</h3>
+                                        <p>Nous n'avons pas pu identifier clairement les médicaments sur votre ordonnance. Veuillez vérifier que l'image est nette et réessayer, ou saisissez manuellement les noms des médicaments.</p>
+                                        <p>${data.raw_content ? `<strong>Texte identifié:</strong> ${data.raw_content}` : ''}</p>
+                                    </div>
+                                `;
+                            }
+                        } else {
+                            // Aucun médicament identifié
+                            pharmacyResults.innerHTML = `
+                                <div class="notification warning">
+                                    <h3>Aucun médicament identifié</h3>
+                                    <p>Nous n'avons pas pu identifier clairement les médicaments sur votre ordonnance. Veuillez vérifier que l'image est nette et réessayer, ou saisissez manuellement les noms des médicaments.</p>
+                                </div>
+                            `;
+                        }
+                    } else {
+                        // Erreur lors de l'analyse
+                        let errorMessage = data.message || 'Une erreur est survenue lors de l\'analyse de votre ordonnance.';
+                        
+                        pharmacyResults.innerHTML = `
+                            <div class="notification error">
+                                <h3>Erreur lors de l'analyse</h3>
+                                <p>${errorMessage}</p>
+                                <div class="error-help">
+                                    <p><strong>Solutions possibles :</strong></p>
+                                    <ul>
+                                        <li>Vérifiez que votre image est claire et nette</li>
+                                        <li>Essayez avec une autre image ou un autre format</li>
+                                        <li>Vous pouvez également saisir manuellement les noms de médicaments</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        `;
+                        console.error('Erreur analyse:', data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                    pharmacyResults.innerHTML = `
+                        <div class="notification error">
+                            <h3>Erreur de communication</h3>
+                            <p>Une erreur est survenue lors de la communication avec le serveur.</p>
+                            <div class="error-help">
+                                <p><strong>Solutions possibles :</strong></p>
+                                <ul>
+                                    <li>Vérifiez votre connexion internet</li>
+                                    <li>Rechargez la page et réessayez</li>
+                                    <li>Vous pouvez également saisir manuellement les noms de médicaments</li>
+                                </ul>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+            } else if (query) {
+                // CAS 2: RECHERCHE MANUELLE DE MÉDICAMENTS
+                // Effectuer directement la recherche avec le texte entré
+                // Afficher le message spécifique pour la recherche manuelle
+                pharmacyResults.innerHTML = `
+                    <div class="loading search">
+                        <i class="fas fa-search"></i>
+                        <div class="loading-text">
+                            <span>Recherche en cours...</span>
+                            <small>Nous cherchons les pharmacies proches ayant ce médicament en stock</small>
+                        </div>
+                        <i class="fas fa-spinner"></i>
+                    </div>
+                `;
+                
                 const searchQueryInput = document.getElementById('searchQuery');
                 if (searchQueryInput) {
                     searchQueryInput.value = query;
                 }
                 
+                // Lancer directement la recherche des pharmacies avec ce médicament
                 performSearch(query);
-            } else if (hasFile) {
-                // Handle file upload - not implemented in this version
-                alert('La recherche par ordonnance sera disponible prochainement.');
+            }
+        });
+
+        // Fonction pour afficher les médicaments identifiés
+        function showIdentifiedMedicines(medicines, message) {
+            // Créer une notification à insérer avant les résultats
+            const notificationDiv = document.createElement('div');
+            notificationDiv.className = 'notification success medicines-identified';
+            
+            let medicinesHtml = '<ul class="identified-medicines-list">';
+            medicines.forEach(med => {
+                medicinesHtml += `<li><strong>${med.nom}</strong>${med.dosage ? ` (${med.dosage})` : ''}</li>`;
+            });
+            medicinesHtml += '</ul>';
+            
+            let title = 'Médicaments identifiés sur votre ordonnance';
+            let subtitle = 'Nous avons identifié les médicaments suivants sur votre ordonnance :';
+            let additionalInfo = '';
+            
+            // Si un message est présent et contient "mode secours", ajuster le message
+            if (message && message.includes('mode secours')) {
+                title = 'Médicaments de test (mode démonstration)';
+                subtitle = 'Nous utilisons des données de test pour la démonstration :';
+            }
+            
+            // Ajouter une note si les résultats de recherche sont vides
+            const resultsDiv = document.getElementById('pharmacyResults');
+            if (resultsDiv && resultsDiv.children.length === 1 && resultsDiv.querySelector('.empty-results')) {
+                additionalInfo = `<div class="medicine-not-found">
+                    <p><strong>Note:</strong> Certains médicaments identifiés ne sont pas disponibles dans notre base de données ou n'ont pas été trouvés dans les pharmacies à proximité.</p>
+                    <p>Suggestions:</p>
+                    <ul>
+                        <li>Vérifiez l'orthographe des noms de médicaments</li>
+                        <li>Essayez une recherche avec un autre médicament</li>
+                        <li>Contactez votre médecin pour des alternatives</li>
+                    </ul>
+                </div>`;
+                
+                // Modifier légèrement le style pour indiquer un avertissement
+                notificationDiv.className = 'notification info medicines-identified';
+            }
+            
+            notificationDiv.innerHTML = `
+                <h3>${title}</h3>
+                <p>${subtitle}</p>
+                ${medicinesHtml}
+                ${additionalInfo}
+            `;
+            
+            // Insérer avant les résultats de recherche
+            pharmacyResults.insertAdjacentElement('afterbegin', notificationDiv);
+        }
+
+        // Gestion du drag and drop et des événements de fichier
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        // Highlight drop area when dragging over it
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight() {
+            dropArea.classList.add('dragover');
+        }
+        
+        function unhighlight() {
+            dropArea.classList.remove('dragover');
+        }
+        
+        // Handle dropped files
+        dropArea.addEventListener('drop', handleDrop, false);
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            
+            if (files.length > 0) {
+                fileUpload.files = files;
+                dropArea.querySelector('p').textContent = `Fichier sélectionné: ${files[0].name}`;
+            }
+        }
+        
+        // Handle file input change
+        fileUpload.addEventListener('change', function() {
+            if (this.files.length > 0) {
+                const fileName = this.files[0].name;
+                dropArea.querySelector('p').textContent = `Fichier sélectionné: ${fileName}`;
+                dropArea.classList.add('file-selected');
+                
+                // Ajouter une indication visuelle
+                const icon = dropArea.querySelector('.drop-icon i');
+                icon.className = 'fas fa-file-medical';
+                icon.style.color = 'var(--primary)';
+                
+                // Afficher le bouton de réinitialisation
+                document.getElementById('resetUpload').style.display = 'inline-flex';
+                
+                // Mettre en évidence le bouton de recherche
+                highlightSearchButton();
+            }
+        });
+        
+        // Handle camera input change
+        cameraCapture.addEventListener('change', function() {
+            if (this.files.length > 0) {
+                dropArea.querySelector('p').textContent = 'Photo capturée';
+                dropArea.classList.add('file-selected');
+                
+                // Ajouter une indication visuelle
+                const icon = dropArea.querySelector('.drop-icon i');
+                icon.className = 'fas fa-camera';
+                icon.style.color = 'var(--primary)';
+                
+                // Afficher le bouton de réinitialisation
+                document.getElementById('resetUpload').style.display = 'inline-flex';
+                
+                // Mettre en évidence le bouton de recherche
+                highlightSearchButton();
+            }
+        });
+        
+        // Handle reset button
+        document.getElementById('resetUpload').addEventListener('click', function() {
+            // Réinitialiser les champs de fichier
+            fileUpload.value = '';
+            cameraCapture.value = '';
+            
+            // Réinitialiser l'apparence
+            dropArea.classList.remove('file-selected');
+            dropArea.querySelector('p').textContent = 'Glissez-déposez votre ordonnance ici ou';
+            
+            // Réinitialiser l'icône
+            const icon = dropArea.querySelector('.drop-icon i');
+            icon.className = 'fas fa-cloud-upload-alt';
+            icon.style.color = '';
+            
+            // Masquer le bouton de réinitialisation
+            this.style.display = 'none';
+            
+            // Réinitialiser le style du bouton de recherche
+            const searchBtn = document.querySelector('.search-button-main');
+            searchBtn.classList.remove('pulsate');
+        });
+        
+        // Fonction pour mettre en évidence le bouton de recherche
+        function highlightSearchButton() {
+            const searchBtn = document.querySelector('.search-button-main');
+            searchBtn.classList.add('pulsate');
+            
+            // Faire défiler jusqu'au bouton pour s'assurer qu'il est visible
+            searchBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        // Handle drop event
+        dropArea.addEventListener('drop', function(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            
+            if (files.length > 0) {
+                fileUpload.files = files;
+                const fileName = files[0].name;
+                dropArea.querySelector('p').textContent = `Fichier sélectionné: ${fileName}`;
+                dropArea.classList.add('file-selected');
+                
+                // Ajouter une indication visuelle
+                const icon = dropArea.querySelector('.drop-icon i');
+                icon.className = 'fas fa-file-medical';
+                icon.style.color = 'var(--primary)';
+                
+                // Afficher le bouton de réinitialisation
+                document.getElementById('resetUpload').style.display = 'inline-flex';
+                
+                // Mettre en évidence le bouton de recherche
+                highlightSearchButton();
             }
         });
 

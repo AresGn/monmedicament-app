@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\MedicineSearchApiController;
+use App\Http\Controllers\Api\PrescriptionAnalysisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Medicines search API route
 Route::get('/medicines/search', [MedicineSearchApiController::class, 'search']);
+
+// Prescription analysis API route
+Route::post('/prescription/analyze', [PrescriptionAnalysisController::class, 'analyze']);

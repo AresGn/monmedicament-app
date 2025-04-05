@@ -549,18 +549,15 @@
                 <div class="important-note" style="margin-top: 1.5rem;">
                     <i class="fas fa-exclamation-circle"></i>
                     <div>
-                        <h3>Connexion requise pour finaliser la réservation</h3>
-                        <p>Vous pourrez compléter et soumettre votre réservation après vous être connecté.</p>
+                        <h3>Prévisualisation de votre commande</h3>
+                        <p>Cliquez sur "Continuer" pour vérifier les détails de votre commande.</p>
                     </div>
                 </div>
 
-                <div class="auth-buttons" style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-                    <a href="{{ route('patient.auth.login') }}?redirect={{ url()->full() }}" class="btn-continue" style="flex: 1; text-align: center; text-decoration: none;">
-                        <i class="fas fa-sign-in-alt"></i> Se connecter
-                    </a>
-                    <a href="{{ route('patient.auth.register') }}?redirect={{ url()->full() }}" class="btn-continue" style="flex: 1; background-color: var(--secondary); text-align: center; text-decoration: none;">
-                        <i class="fas fa-user-plus"></i> S'inscrire
-                    </a>
+                <div class="auth-buttons" style="margin-top: 1.5rem;">
+                    <button type="button" id="continueBtn" class="btn-continue" style="width: 100%;">
+                        <i class="fas fa-check"></i> Continuer
+                    </button>
                 </div>
                 @else
                 <button type="submit" class="btn-continue">Continuer</button>
@@ -581,6 +578,51 @@
         const cameraInput = document.getElementById('prescriptionCamera');
         const fileUploadBtn = document.getElementById('fileUploadBtn');
         const cameraCaptureBtn = document.getElementById('cameraCaptureBtn');
+        
+        // Continue button for verification page
+        const continueBtn = document.getElementById('continueBtn');
+        if (continueBtn) {
+            continueBtn.addEventListener('click', function() {
+                // Get medicine info from the page
+                const medicines = [];
+                @foreach($medicines as $medicine)
+                medicines.push({
+                    id: {{ $medicine['id'] }},
+                    name: "{{ $medicine['name'] }}",
+                    price: {{ $medicine['price'] }},
+                    quantity: 1
+                });
+                @endforeach
+
+                // If no medicine in search, use the query from localStorage
+                if (medicines.length === 0) {
+                    const medicineQuery = localStorage.getItem('lastMedicineSearch') || '';
+                    if (medicineQuery) {
+                        // Split search query by commas to get individual medicines
+                        const medicineNames = medicineQuery.split(',').map(med => med.trim()).filter(med => med);
+                        medicineNames.forEach(name => {
+                            medicines.push({
+                                id: 0,
+                                name: name,
+                                price: 0,
+                                quantity: 1
+                            });
+                        });
+                    }
+                }
+                
+                // Store medicine info in localStorage
+                localStorage.setItem('verificationMedicines', JSON.stringify(medicines));
+                
+                // Store the pharmacy info for the verification page
+                localStorage.setItem('verificationPharmacyId', '{{ $pharmacy->id }}');
+                localStorage.setItem('verificationPharmacyName', '{{ $pharmacy->name }}');
+                localStorage.setItem('verificationPharmacyAddress', '{{ $pharmacy->address }}');
+                
+                // Redirect to verification page
+                window.location.href = '{{ route("patient.reservations.verify") }}';
+            });
+        }
 
         // Handle drag and drop
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {

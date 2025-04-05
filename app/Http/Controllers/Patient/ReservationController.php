@@ -160,4 +160,20 @@ class ReservationController extends Controller
         return redirect()->route('patient.reservations.index')
             ->with('error', 'Cannot cancel this reservation.');
     }
+
+    /**
+     * Display the verification page before finalizing the reservation
+     */
+    public function verify(Request $request)
+    {
+        return view('patient.reservation.verify');
+    }
+
+    /**
+     * Display the confirmation page after reservation is submitted
+     */
+    public function confirm(Request $request)
+    {
+        return view('patient.reservation.confirm');
+    }
 } 
