@@ -16,7 +16,7 @@ class MedicineSearchController extends Controller
      */
     public function index()
     {
-        return view('patient.search.index');
+        return redirect()->route('patient.search.pharmacy.list');
     }
 
     /**
@@ -26,10 +26,8 @@ class MedicineSearchController extends Controller
     {
         // Si aucune requête n'est fournie, afficher une page de résultats vide
         if (!$request->has('query') || empty($request->input('query'))) {
-            return view('patient.search.results', [
-                'pharmacies' => collect(),
-                'query' => '',
-            ]);
+            // Rediriger vers la liste des pharmacies
+            return redirect()->route('patient.search.pharmacy.list');
         }
 
         $request->validate([
@@ -85,7 +83,7 @@ class MedicineSearchController extends Controller
             ->get();
 
         // Group results by pharmacy for better display
-        $pharmacies = $results->groupBy('pharmacy_id')->map(function($items) {
+        $searchResults = $results->groupBy('pharmacy_id')->map(function($items) {
             $pharmacy = $items->first();
             
             return [
@@ -106,9 +104,16 @@ class MedicineSearchController extends Controller
             ];
         });
 
-        return view('patient.search.results', [
+        // Get regular pharmacies for the view
+        $pharmacies = Pharmacy::orderBy('name')
+            ->withCount('inventory')
+            ->paginate(12);
+
+        // Return to the pharmacy list view with search results
+        return view('patient.search.pharmacy_list', [
             'pharmacies' => $pharmacies,
-            'query' => $query,
+            'searchResults' => $searchResults,
+            'searchQuery' => $query
         ]);
     }
 

@@ -470,40 +470,88 @@
         </div>
     </main>
 
-    <footer class="bg-primary text-white mt-4 py-4">
+    <footer class="py-4 mt-4">
         <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-6 mb-4">
-                    <h5 class="text-uppercase">MonMédicament</h5>
-                    <p>
-                        Trouvez facilement vos médicaments dans les pharmacies proches de chez vous.
-                    </p>
+            <div class="row align-items-center justify-content-between">
+                <div class="col-auto">
+                    <span class="footer-logo">MonMédicament</span>
                 </div>
-
-                <div class="col-6 col-md-3 mb-3">
-                    <h5 class="text-uppercase">Liens utiles</h5>
-                    <ul class="list-unstyled mb-0">
-                        <li class="mb-2"><a href="#!" class="text-white">À propos</a></li>
-                        <li class="mb-2"><a href="#!" class="text-white">Confidentialité</a></li>
-                        <li class="mb-2"><a href="#!" class="text-white">Conditions d'utilisation</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-6 col-md-3 mb-3">
-                    <h5 class="text-uppercase">Contact</h5>
-                    <ul class="list-unstyled mb-0">
-                        <li class="mb-2"><a href="#!" class="text-white">Support</a></li>
-                        <li class="mb-2"><a href="#!" class="text-white">Nous contacter</a></li>
-                    </ul>
+                <div class="col-auto">
+                    <div class="footer-links">
+                        <a href="{{ url('/about') }}">À propos</a>
+                        <span class="separator">•</span>
+                        <a href="{{ url('/privacy') }}">Confidentialité</a>
+                        <span class="separator">•</span>
+                        <a href="{{ url('/terms') }}">Conditions</a>
+                        <span class="separator">•</span>
+                        <a href="{{ url('/contact') }}">Contact</a>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="text-center p-3 mt-3" style="background-color: rgba(0, 0, 0, 0.1);">
-            © {{ date('Y') }} Droits réservés:
-            <a class="text-white" href="#">MonMédicament</a>
+            <div class="text-center mt-3">
+                <p class="copyright">© {{ date('Y') }} MonMédicament. Tous droits réservés.</p>
+            </div>
         </div>
     </footer>
+
+    <style>
+        /* Styles du footer minimaliste */
+        footer {
+            background-color: #f8f9fa;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .footer-logo {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #007BFF;
+        }
+
+        .footer-links {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #555;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: #007BFF;
+        }
+
+        .separator {
+            color: #ccc;
+            font-size: 0.8rem;
+        }
+
+        .copyright {
+            font-size: 0.85rem;
+            color: #777;
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 767.98px) {
+            .row.align-items-center {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .col-auto {
+                margin-bottom: 1rem;
+            }
+            
+            .footer-links {
+                justify-content: center;
+            }
+        }
+    </style>
 
     <style>
         /* Styles pour la navigation */

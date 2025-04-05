@@ -27,6 +27,12 @@
                         Contact
                     </a>
                 </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/about') }}">
+                        À propos
+                    </a>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->

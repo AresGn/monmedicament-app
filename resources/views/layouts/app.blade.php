@@ -133,41 +133,87 @@
             </div>
         </main>
 
-        <footer class="mt-4">
+        <footer class="footer">
             <div class="container">
-                <div class="row">
-                    <div class="col-12 col-md-6 mb-4">
-                        <h5 class="text-uppercase">MonMédicament</h5>
-                        <p>
-                            Trouvez facilement vos médicaments dans les pharmacies proches de chez vous.
-                        </p>
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <a href="{{ url('/') }}">MonMédicament</a>
                     </div>
-
-                    <div class="col-6 col-md-3 mb-3">
-                        <h5 class="text-uppercase">Liens utiles</h5>
-                        <ul class="list-unstyled mb-0">
-                            <li class="mb-2"><a href="#!" class="text-white">À propos</a></li>
-                            <li class="mb-2"><a href="#!" class="text-white">Confidentialité</a></li>
-                            <li class="mb-2"><a href="#!" class="text-white">Conditions d'utilisation</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-6 col-md-3 mb-3">
-                        <h5 class="text-uppercase">Contact</h5>
-                        <ul class="list-unstyled mb-0">
-                            <li class="mb-2"><a href="#!" class="text-white">Support</a></li>
-                            <li class="mb-2"><a href="#!" class="text-white">Nous contacter</a></li>
-                        </ul>
+                    <div class="footer-links">
+                        <a href="{{ url('/about') }}">À propos</a>
+                        <a href="{{ url('/privacy') }}">Confidentialité</a>
+                        <a href="{{ url('/terms') }}">Conditions</a>
+                        <a href="{{ url('/contact') }}">Contact</a>
                     </div>
                 </div>
-            </div>
-
-            <div class="text-center p-3 mt-3" style="background-color: rgba(0, 0, 0, 0.1);">
-                © {{ date('Y') }} Droits réservés:
-                <a class="text-white" href="#">MonMédicament</a>
+                <div class="copyright">
+                    © {{ date('Y') }} MonMédicament. Tous droits réservés.
+                </div>
             </div>
         </footer>
     </div>
+
+    <style>
+        /* Minimalist Footer Styles */
+        .footer {
+            background-color: #f8f8f8;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid #eaeaea;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-logo a {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            color: #888;
+            font-size: 0.85rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+            
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+        }
+    </style>
 
     @yield('scripts')
 </body>

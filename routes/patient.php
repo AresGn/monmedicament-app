@@ -43,7 +43,7 @@ Route::prefix('patient/auth')->name('patient.auth.')->group(function () {
     Route::get('/callback/{provider}', [AuthController::class, 'handleProviderCallback'])->name('callback');
 });
 
-// Routes for terms and privacy policy
+// Routes for terms, privacy policy, contact and about
 Route::get('/terms', function () {
     return view('patient.terms');
 })->name('terms');
@@ -51,6 +51,14 @@ Route::get('/terms', function () {
 Route::get('/privacy', function () {
     return view('patient.privacy');
 })->name('privacy');
+
+Route::get('/contact', function () {
+    return view('patient.contact');
+})->name('contact');
+
+Route::get('/about', function () {
+    return view('patient.about');
+})->name('about');
 
 // Medicine search routes (no authentication required)
 Route::get('/patient/search/index', [MedicineSearchController::class, 'index'])->name('patient.search.index');
