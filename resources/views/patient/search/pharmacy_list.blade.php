@@ -224,7 +224,7 @@
     }
 
     .btn-primary {
-        background: var(--primary);
+        background: var(--secondary);
         color: var(--white);
         border: none;
         padding: 0.75rem 1rem;
@@ -236,7 +236,7 @@
     }
 
     .btn-primary:hover {
-        background: #0056b3;
+        background: #218838;
     }
 
     .popular-searches {

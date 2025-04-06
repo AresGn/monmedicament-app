@@ -395,3 +395,33 @@ Inspirons-nous d'une ambiance professionnelle et apaisante, en utilisant des ton
 
 ---
 
+
+
+
+D'accord, abordons l'optimisation mobile-first par paliers! Voici comment nous pouvons procéder:
+
+## Palier 1 - Harmonisation de la structure de base
+
+1. **Unifier les layouts** - Choisir entre les différentes implémentations de navigation et standardiser
+2. **Optimiser le viewport** - S'assurer que tous les templates ont les bons paramètres meta
+3. **Normaliser les conteneurs** - Adopter des largeurs consistantes pour tous les conteneurs
+
+## Palier 2 - Composants critiques
+
+1. **Header/Navigation** - Optimiser l'expérience mobile du menu principal
+2. **Footer** - Créer un footer unifié et responsive
+3. **Formulaires de recherche** - Améliorer l'ergonomie sur petits écrans
+
+## Palier 3 - Contenu et médias
+
+1. **Typographie responsive** - Utiliser des unités relatives (rem/em) pour les tailles de police
+2. **Images adaptatives** - Implémenter des techniques d'images responsives
+3. **Grille flexible** - Restructurer les layouts avec une approche mobile-first
+
+## Palier 4 - Interactions et finitions
+
+1. **Touch targets** - Agrandir zones cliquables pour mobile
+2. **Performance** - Optimiser le temps de chargement sur mobile
+3. **Tests** - Valider sur différents appareils
+
+Par quel palier souhaitez-vous commencer?

@@ -7,8 +7,8 @@
 <style>
     /* Styles mobile-first */
     .hero {
-        background: linear-gradient(135deg, #0D9488 0%, #0EA5E9 100%);
-        color: var(--white);
+        background: linear-gradient(135deg, #198754 0%, #0D6EFD 100%);
+        color: white;
         text-align: center;
         padding: 2rem 1rem;
         width: 100%;
@@ -69,8 +69,8 @@
     }
 
     .search-button {
-        background: var(--secondary);
-        color: var(--white);
+        background: #198754;
+        color: white;
         border: none;
         border-radius: 0.25rem;
         padding: 0 1rem;
@@ -84,7 +84,7 @@
     }
 
     .search-button:hover {
-        background-color: #218838;
+        background-color: #157347;
     }
 
     .search-divider {
@@ -96,7 +96,7 @@
     .search-divider span {
         display: inline-block;
         padding: 0 0.75rem;
-        background: var(--primary);
+        background: #0D6EFD;
         color: white;
         font-weight: bold;
         position: relative;
@@ -124,7 +124,7 @@
     }
 
     .ordonnance-upload h3 {
-        color: var(--primary);
+        color: #0D6EFD;
         margin-bottom: 0.75rem;
         font-size: 1.2rem;
         text-align: left;
@@ -144,7 +144,7 @@
     }
 
     .drop-area:hover, .drop-area.dragover {
-        border-color: var(--primary);
+        border-color: #0D6EFD;
         background: #f0f9ff;
     }
 
@@ -180,7 +180,7 @@
         border-radius: 0.25rem;
         font-size: 0.9rem;
         font-weight: 600;
-        background-color: var(--primary);
+        background-color: #0D6EFD;
         color: white;
         cursor: pointer;
         transition: all 0.2s;
@@ -188,23 +188,23 @@
     }
 
     .upload-btn:hover {
-        background-color: #1e40af;
+        background-color: #0b5ed7;
     }
 
     .camera-btn {
-        background-color: #2563eb;
+        background-color: #0D6EFD;
     }
 
     .camera-btn:hover {
-        background-color: #1d4ed8;
+        background-color: #0b5ed7;
     }
 
     .reset-btn {
-        background-color: #dc2626;
+        background-color: #DC3545;
     }
 
     .reset-btn:hover {
-        background-color: #b91c1c;
+        background-color: #bb2d3b;
     }
 
     .file-formats {
@@ -221,7 +221,7 @@
         padding: 0.5rem 0.75rem;
         border-radius: 0.25rem;
         margin: 0.75rem 0;
-        border: 1px solid #0EA5E9;
+        border: 1px solid #0D6EFD;
         font-size: 0.85rem;
     }
 
@@ -234,13 +234,13 @@
     }
 
     .file-info p i {
-        color: #0EA5E9;
+        color: #0D6EFD;
     }
 
     .remove-file {
         background: none;
         border: none;
-        color: #ff4d4f;
+        color: #DC3545;
         cursor: pointer;
     }
 
@@ -290,8 +290,136 @@
     }
     
     .highlight-match {
-        background-color: rgba(0, 123, 255, 0.15);
+        background-color: rgba(13, 110, 253, 0.15);
         font-weight: bold;
+    }
+    
+    /* Loading animations */
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .loading i.fa-sync {
+        animation: spin 2s linear infinite;
+    }
+
+    .loading i.fa-spinner {
+        animation: spin 1s linear infinite;
+    }
+
+    .loading.analysis i, .loading.search i, .loading.transition i {
+        color: inherit;
+        font-size: 1.5rem;
+        margin-right: 0.5rem;
+    }
+
+    .loading.analysis, .loading.search, .loading.transition {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        text-align: center;
+        border-radius: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .loading.analysis {
+        color: #0D6EFD;
+        background-color: rgba(13, 110, 253, 0.05);
+        border: 1px dashed #0D6EFD;
+    }
+
+    .loading.search {
+        color: #198754;
+        background-color: rgba(25, 135, 84, 0.05);
+        border: 1px dashed #198754;
+    }
+
+    .loading.transition {
+        color: #0D6EFD;
+        background-color: rgba(13, 110, 253, 0.05);
+        border: 1px dashed #0D6EFD;
+    }
+
+    /* Loading text styling */
+    .loading-text {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        flex: 1;
+        margin: 0 1rem;
+    }
+
+    .loading-text span {
+        font-weight: 500;
+        margin-bottom: 0.25rem;
+    }
+
+    .loading-text small {
+        font-size: 0.8rem;
+        opacity: 0.8;
+    }
+
+    .loading i.fa-spinner, .loading i.fa-sync {
+        animation: spin 1s linear infinite;
+    }
+
+    .loading i {
+        flex-shrink: 0;
+    }
+    
+    /* Notification styles */
+    .notification {
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .notification.success {
+        background-color: rgba(25, 135, 84, 0.05);
+        border: 1px solid #198754;
+        color: #333;
+    }
+    
+    .notification.warning {
+        background-color: rgba(255, 193, 7, 0.05);
+        border: 1px solid #ffc107;
+        color: #333;
+    }
+    
+    .notification.error {
+        background-color: rgba(220, 53, 69, 0.05);
+        border: 1px solid #DC3545;
+        color: #333;
+    }
+    
+    .notification.info {
+        background-color: rgba(13, 110, 253, 0.05);
+        border: 1px solid #0D6EFD;
+        color: #333;
+    }
+    
+    .notification h3 {
+        margin-bottom: 0.75rem;
+        font-size: 1.2rem;
+    }
+    
+    .notification.success h3 {
+        color: #198754;
+    }
+    
+    .notification.warning h3 {
+        color: #ffc107;
+    }
+    
+    .notification.error h3 {
+        color: #DC3545;
+    }
+    
+    .notification.info h3 {
+        color: #0D6EFD;
     }
 
     /* Tablet and Desktop styles */
@@ -430,7 +558,7 @@
     }
 
     .how-it-works h2 {
-        color: #333;
+        color: #0D6EFD;
         font-size: 2rem;
         margin-bottom: 3rem;
         position: relative;
@@ -446,17 +574,19 @@
     }
 
     .step-card {
-        background: var(--neutral);
+        background: #f8f9fa;
         padding: 2rem;
         border-radius: 1rem;
         flex: 1;
         position: relative;
         transition: transform 0.3s;
         max-width: 300px;
+        border: 1px solid rgba(13, 110, 253, 0.2);
     }
 
     .step-card:hover {
         transform: translateY(-5px);
+        border-color: #0D6EFD;
     }
 
     .step-icon {
@@ -469,11 +599,12 @@
         align-items: center;
         justify-content: center;
         position: relative;
+        box-shadow: 0 0 15px rgba(13, 110, 253, 0.1);
     }
 
     .step-icon i {
         font-size: 2rem;
-        color: var(--primary);
+        color: #0D6EFD;
     }
 
     .step-number {
@@ -482,7 +613,7 @@
         right: -10px;
         width: 30px;
         height: 30px;
-        background: var(--primary);
+        background: #198754;
         color: var(--white);
         border-radius: 50%;
         display: flex;
@@ -826,7 +957,7 @@
 
     .search-results-header h2 {
         font-size: 1.25rem;
-        color: var(--primary);
+        color: #0D6EFD;
         margin: 0;
     }
 
@@ -849,370 +980,130 @@
 
     .filter-button:hover, .location-button:hover {
         background: #f0f0f0;
-    }
-
-    .map-container {
-        height: 300px;
-        border-radius: 0.5rem;
-        overflow: hidden;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        width: 100%;
-    }
-
-    .pharmacy-results-container {
-        width: 100%;
-        overflow: hidden;
-    }
-
-    .pharmacy-results-scroll {
-        display: flex;
-        gap: 1rem;
-        overflow-x: auto;
-        padding: 0.5rem 0;
-        scroll-behavior: smooth;
-        scrollbar-width: thin;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .pharmacy-results-scroll::-webkit-scrollbar {
-        height: 8px;
-    }
-
-    .pharmacy-results-scroll::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        border-radius: 8px;
-    }
-
-    .pharmacy-results-scroll::-webkit-scrollbar-thumb {
-        background: #ccc;
-        border-radius: 8px;
-    }
-
-    .pharmacy-results-scroll::-webkit-scrollbar-thumb:hover {
-        background: #aaa;
-    }
-
-    .pharmacy-card {
-        background: white;
-        border-radius: 0.5rem;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        padding: 1rem;
-        min-width: 300px;
-        max-width: 300px;
-        border: 1px solid #eee;
-        flex-shrink: 0;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .pharmacy-card:hover {
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        transform: translateY(-2px);
-    }
-
-    .pharmacy-card.highlight {
-        border: 2px solid var(--primary);
-        box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.3);
+        border-color: #0D6EFD;
     }
     
-    .pharmacy-header {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 0.5rem;
-    }
-
-    .pharmacy-name {
-        font-size: 1.1rem;
-        font-weight: 600;
-        color: var(--primary);
-        margin-bottom: 0.25rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    
-    .pharmacy-rating {
-        display: flex;
-        align-items: center;
-        margin-bottom: 0.5rem;
-    }
-    
-    .pharmacy-rating .stars {
-        display: flex;
-        color: #FFD700;
-        margin-right: 0.5rem;
-    }
-    
-    .pharmacy-rating .stars i {
-        margin-right: 2px;
-    }
-    
-    .pharmacy-rating .reviews-count {
-        font-size: 0.8rem;
-        color: #666;
-    }
-
-    .pharmacy-distance-tag {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.25rem;
-        background: rgba(13, 148, 136, 0.1);
-        color: var(--primary);
-        font-size: 0.8rem;
-        font-weight: 600;
-        padding: 0.25rem 0.5rem;
-        border-radius: 1rem;
-        margin-bottom: 0.75rem;
-    }
-
-    .pharmacy-details {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 0.5rem;
-        margin-bottom: 0.75rem;
-    }
-
-    .pharmacy-info-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 0.5rem;
-        max-width: 100%;
-    }
-
-    .pharmacy-info-item i {
-        color: var(--primary);
-        font-size: 0.9rem;
-        margin-top: 0.2rem;
-        flex-shrink: 0;
-        width: 12px;
-        text-align: center;
-    }
-
-    .pharmacy-info-content {
-        font-size: 0.9rem;
-        color: #666;
-        white-space: normal;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        line-height: 1.3;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        max-width: calc(100% - 20px);
-    }
-
-    .medicine-list {
-        background: #f9f9f9;
-        border-radius: 0.25rem;
-        padding: 0.75rem;
-        margin: 0.75rem 0;
-        max-height: 150px;
-        overflow-y: auto;
-        scrollbar-width: thin;
-    }
-
-    .medicine-list::-webkit-scrollbar {
-        width: 6px;
-    }
-
-    .medicine-list::-webkit-scrollbar-track {
-        background: #f1f1f1;
-    }
-
-    .medicine-list::-webkit-scrollbar-thumb {
-        background: #ccc;
-        border-radius: 4px;
-    }
-
-    .medicine-item {
-        display: flex;
-        justify-content: space-between;
-        padding: 0.5rem 0;
-        border-bottom: 1px solid #eee;
-    }
-
-    .medicine-item:last-child {
-        border-bottom: none;
-    }
-
-    .medicine-name {
-        font-weight: 500;
-        font-size: 0.9rem;
-    }
-
-    .medicine-price {
-        color: var(--primary);
-        font-weight: 500;
-        font-size: 0.9rem;
-    }
-
-    .stock-badge {
-        display: inline-block;
-        padding: 0.15rem 0.4rem;
-        border-radius: 1rem;
-        font-size: 0.7rem;
-        font-weight: 500;
-        margin-left: 0.5rem;
-    }
-
-    .in-stock {
-        background: rgba(40, 167, 69, 0.1);
-        color: var(--secondary);
-    }
-
-    .pharmacy-actions {
-        display: flex;
-        gap: 0.5rem;
-        margin-top: 1rem;
-        justify-content: space-between;
-    }
-
-    .btn-action {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.5rem;
-        border-radius: 0.25rem;
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 0.85rem;
-        transition: all 0.2s;
-        flex: 1;
-    }
-
-    .btn-details {
-        background: var(--primary);
-        color: white;
-    }
-
-    .btn-reserve {
-        background: var(--secondary);
-        color: white;
-    }
-
-    .btn-action:hover {
-        opacity: 0.9;
-        transform: translateY(-2px);
-    }
-
-    .loading, .error, .no-results {
-        padding: 2rem;
-        text-align: center;
-        background: white;
-        border-radius: 0.5rem;
-        margin: 1rem 0;
-    }
-
-    /* Filters Bar Styles */
+    /* Filter styles - Disposition en 4 colonnes */
     .filters-bar {
         background: white;
         border-radius: 0.5rem;
-        padding: 1rem;
+        padding: 1.5rem;
         margin-bottom: 1rem;
         box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1rem;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
     }
-
+    
     .filter-group {
-        margin-bottom: 0.5rem;
+        width: 100%;
     }
-
+    
     .filter-group h4 {
-        color: #333;
-        margin: 0 0 0.5rem 0;
         font-size: 1rem;
+        color: #0D6EFD;
+        margin-bottom: 0.75rem;
         font-weight: 600;
+        border-bottom: 2px solid rgba(13, 110, 253, 0.2);
+        padding-bottom: 0.5rem;
     }
-
-    .filter-options.horizontal {
+    
+    .filter-options {
         display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
+        flex-direction: column;
+        gap: 0.75rem;
+        width: 100%;
     }
-
+    
     .filter-option {
         display: flex;
         align-items: center;
-        gap: 0.35rem;
+        position: relative;
         cursor: pointer;
+        user-select: none;
+        border: 1px solid #eee;
+        border-radius: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        transition: all 0.2s;
+        width: 100%;
     }
-
+    
+    .filter-option:hover {
+        border-color: #0D6EFD;
+        background-color: rgba(13, 110, 253, 0.05);
+    }
+    
+    .filter-option input {
+        margin-right: 0.5rem;
+        width: 16px;
+        height: 16px;
+        accent-color: #0D6EFD;
+    }
+    
     .filter-label {
-        font-size: 0.85rem;
-        color: #555;
+        font-size: 0.9rem;
+        color: #333;
+        flex: 1;
     }
-
+    
     .filter-actions {
         display: flex;
-        gap: 0.5rem;
-        grid-column: 1 / -1;
         justify-content: flex-end;
-        margin-top: 0.5rem;
+        gap: 1rem;
+        margin-top: 1rem;
+        grid-column: 1 / -1;  /* S'étend sur toutes les colonnes */
+        border-top: 1px solid #f0f0f0;
+        padding-top: 1.5rem;
     }
-
+    
     .btn-apply-filters, .btn-reset-filters {
-        padding: 0.5rem 1rem;
+        padding: 0.75rem 1.5rem;
         border-radius: 0.25rem;
-        font-weight: 500;
-        cursor: pointer;
-        text-align: center;
-        border: none;
-        transition: all 0.2s;
         font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: center;
     }
-
+    
     .btn-apply-filters {
-        background-color: #007bff;
+        background-color: #0D6EFD;
         color: white;
+        border: none;
+        min-width: 150px;
     }
-
+    
     .btn-apply-filters:hover {
-        background-color: #0069d9;
+        background-color: #0b5ed7;
     }
-
+    
     .btn-reset-filters {
         background-color: white;
-        color: #333;
+        color: #666;
         border: 1px solid #ddd;
+        min-width: 150px;
     }
-
+    
     .btn-reset-filters:hover {
-        background-color: #f8f9fa;
+        border-color: #DC3545;
+        color: #DC3545;
     }
-
-    .search-input {
-        padding: 0.5rem 1rem;
-        border-radius: 0.25rem;
-        border: 1px solid #ddd;
-        font-size: 0.9rem;
-        background-color: white;
-        min-width: 200px;
+    
+    /* Responsive pour les filtres */
+    @media (max-width: 1200px) {
+        .filters-bar {
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
-
-    /* Tablet and Desktop styles */
-    @media (min-width: 768px) {
-        .search-results {
-            padding: 2rem;
+    
+    @media (max-width: 992px) {
+        .filters-bar {
+            grid-template-columns: repeat(2, 1fr);
         }
-
-        .search-results-header h2 {
-            font-size: 1.5rem;
-        }
-
-        .map-container {
-            height: 400px;
-        }
-
-        .pharmacy-results-scroll {
-            gap: 1.5rem;
-            padding: 0.5rem;
-        }
-
-        .pharmacy-card {
-            min-width: 350px;
-            max-width: 350px;
+    }
+    
+    @media (max-width: 768px) {
+        .filters-bar {
+            grid-template-columns: 1fr;
         }
     }
 
@@ -1569,6 +1460,828 @@
     .loading i {
         flex-shrink: 0;
     }
+
+    /* Search Results Specific Styles */
+    .map-container {
+        height: 300px;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        width: 100%;
+    }
+
+    .pharmacy-results-container {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .pharmacy-results-scroll {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        padding: 0.5rem 0;
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .pharmacy-results-scroll::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .pharmacy-results-scroll::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 8px;
+    }
+
+    .pharmacy-results-scroll::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 8px;
+    }
+
+    .pharmacy-results-scroll::-webkit-scrollbar-thumb:hover {
+        background: #aaa;
+    }
+
+    .pharmacy-card {
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        padding: 1rem;
+        min-width: 300px;
+        max-width: 300px;
+        border: 1px solid #eee;
+        flex-shrink: 0;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .pharmacy-card:hover {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transform: translateY(-2px);
+        border-color: #0D6EFD;
+    }
+
+    .pharmacy-card.highlight {
+        border: 2px solid #0D6EFD;
+        box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.3);
+    }
+    
+    .pharmacy-header {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0.5rem;
+    }
+
+    .pharmacy-name {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #0D6EFD;
+        margin-bottom: 0.25rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .pharmacy-rating {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+    }
+    
+    .pharmacy-rating .stars {
+        display: flex;
+        color: #FFD700;
+        margin-right: 0.5rem;
+    }
+    
+    .pharmacy-rating .stars i {
+        margin-right: 2px;
+    }
+    
+    .pharmacy-rating .reviews-count {
+        font-size: 0.8rem;
+        color: #666;
+    }
+
+    .pharmacy-distance-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        background: rgba(13, 110, 253, 0.1);
+        color: #0D6EFD;
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 0.25rem 0.5rem;
+        border-radius: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .pharmacy-details {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .pharmacy-info-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        max-width: 100%;
+    }
+
+    .pharmacy-info-item i {
+        color: #0D6EFD;
+        font-size: 0.9rem;
+        margin-top: 0.2rem;
+        flex-shrink: 0;
+        width: 12px;
+        text-align: center;
+    }
+
+    .pharmacy-info-content {
+        font-size: 0.9rem;
+        color: #666;
+        white-space: normal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        max-width: calc(100% - 20px);
+    }
+
+    .medicine-list {
+        background: #f9f9f9;
+        border-radius: 0.25rem;
+        padding: 0.75rem;
+        margin: 0.75rem 0;
+        max-height: 150px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+    }
+
+    .medicine-list::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .medicine-list::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .medicine-list::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 4px;
+    }
+
+    .medicine-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .medicine-item:last-child {
+        border-bottom: none;
+    }
+
+    .medicine-name {
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
+
+    .medicine-price {
+        color: #0D6EFD;
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
+
+    .stock-badge {
+        display: inline-block;
+        padding: 0.15rem 0.4rem;
+        border-radius: 1rem;
+        font-size: 0.7rem;
+        font-weight: 500;
+        margin-left: 0.5rem;
+    }
+
+    .in-stock {
+        background: rgba(25, 135, 84, 0.1);
+        color: #198754;
+    }
+    
+    .limited-stock {
+        background: rgba(255, 193, 7, 0.1);
+        color: #ffc107;
+    }
+    
+    .out-of-stock {
+        background: rgba(220, 53, 69, 0.1);
+        color: #DC3545;
+    }
+
+    .pharmacy-actions {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        justify-content: space-between;
+    }
+
+    .btn-action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.85rem;
+        transition: all 0.2s;
+        flex: 1;
+    }
+
+    .btn-details {
+        background: #0D6EFD;
+        color: white;
+    }
+    
+    .btn-details:hover {
+        background: #0b5ed7;
+    }
+
+    .btn-reserve {
+        background: #198754;
+        color: white;
+    }
+    
+    .btn-reserve:hover {
+        background: #157347;
+    }
+    
+    .btn-call {
+        background: #0D6EFD;
+        color: white;
+        border: none;
+    }
+    
+    .btn-call:hover {
+        background: #0b5ed7;
+    }
+
+    .btn-action:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+    }
+
+    .loading, .error, .no-results {
+        padding: 2rem;
+        text-align: center;
+        background: white;
+        border-radius: 0.5rem;
+        margin: 1rem 0;
+    }
+    
+    .empty-results {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        border-radius: 0.5rem;
+        padding: 2rem;
+        text-align: center;
+    }
+    
+    .empty-results i {
+        font-size: 3rem;
+        color: #DC3545;
+        margin-bottom: 1rem;
+    }
+    
+    .empty-results h3 {
+        color: #DC3545;
+        margin-bottom: 0.5rem;
+    }
+    
+    .empty-results p {
+        color: #666;
+        max-width: 500px;
+    }
+    
+    .btn-try-again {
+        background: #0D6EFD;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.25rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    
+    .btn-try-again:hover {
+        background: #0b5ed7;
+    }
+    
+    .search-btn-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .search-button-main {
+        background: #198754;
+        color: white;
+        border: none;
+        border-radius: 0.25rem;
+        padding: 0.75rem 2rem;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        min-width: 200px;
+    }
+    
+    .search-button-main:hover {
+        background: #157347;
+        transform: translateY(-2px);
+    }
+    
+    .search-button-main i {
+        font-size: 1.1rem;
+    }
+
+    /* Styles spécifiques pour les très petits écrans */
+    @media (max-width: 360px) {
+        .hero h1 {
+            font-size: 1.25rem;
+        }
+
+        .hero p {
+            font-size: 0.9rem;
+        }
+
+        .search-button {
+            padding: 0 0.75rem;
+            min-width: 40px;
+        }
+
+        .pharmacy-card {
+            min-width: 280px;
+            max-width: 280px;
+        }
+
+        .btn-action {
+            padding: 0.4rem;
+            font-size: 0.8rem;
+        }
+    }
+
+    /* Styles pour les petits téléphones */
+    @media (max-width: 480px) {
+        .hero {
+            padding: 1.5rem 1rem;
+        }
+
+        .search-options {
+            gap: 0.75rem;
+        }
+
+        .search-input-container {
+            flex-direction: column;
+        }
+
+        .search-input-container input {
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+
+        .search-button-main {
+            width: 100%;
+        }
+
+        .upload-buttons {
+            flex-direction: column;
+        }
+
+        .upload-btn {
+            width: 100%;
+        }
+
+        .pharmacy-results-scroll {
+            padding: 0.25rem;
+        }
+
+        .pharmacy-card {
+            min-width: 290px;
+            max-width: 290px;
+            padding: 0.75rem;
+        }
+
+        .pharmacy-actions {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .btn-action {
+            width: 100%;
+        }
+
+        .filters-bar {
+            padding: 1rem;
+        }
+
+        .filter-option {
+            padding: 0.4rem 0.6rem;
+        }
+
+        .filter-label {
+            font-size: 0.85rem;
+        }
+    }
+
+    /* Styles pour les téléphones moyens */
+    @media (min-width: 481px) and (max-width: 767px) {
+        .hero {
+            padding: 2rem 1rem;
+        }
+
+        .search-options {
+            gap: 1rem;
+        }
+
+        .pharmacy-card {
+            min-width: 320px;
+            max-width: 320px;
+        }
+
+        .pharmacy-actions {
+            flex-direction: row;
+        }
+    }
+
+    /* Styles pour les grands téléphones et tablettes */
+    @media (min-width: 768px) and (max-width: 991px) {
+        .hero h1 {
+            font-size: 2rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+        }
+
+        .search-bar {
+            max-width: 700px;
+        }
+
+        .pharmacy-card {
+            min-width: 340px;
+            max-width: 340px;
+        }
+    }
+
+    /* Améliorations générales de la responsivité */
+    .search-input-container {
+        position: relative;
+    }
+
+    .search-input-container input {
+        height: 48px;
+        font-size: 1rem;
+        padding-right: 40px;
+    }
+
+    .search-button {
+        height: 48px;
+    }
+
+    .drop-area {
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .pharmacy-results-container {
+        margin-top: 1rem;
+    }
+
+    .pharmacy-results-scroll {
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .pharmacy-results-scroll::-webkit-scrollbar {
+        display: none;
+    }
+
+    .pharmacy-card {
+        scroll-snap-align: start;
+    }
+
+    /* Améliorations de l'accessibilité et du touch */
+    @media (hover: none) {
+        .search-button:active,
+        .btn-action:active {
+            transform: scale(0.98);
+        }
+
+        .pharmacy-card {
+            touch-action: pan-x;
+        }
+    }
+
+    /* Optimisations pour les écrans à haute densité de pixels */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        .search-input-container input,
+        .btn,
+        .pharmacy-card {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    }
+
+    /* Animations optimisées pour mobile */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .search-results {
+        animation: fadeInUp 0.3s ease-out;
+    }
+
+    /* Amélioration du contraste et de la lisibilité */
+    .pharmacy-name {
+        font-size: 1.2rem;
+        line-height: 1.3;
+    }
+
+    .pharmacy-info-content {
+        line-height: 1.4;
+    }
+
+    .stock-badge {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+
+    /* Optimisations pour les écrans de petite taille */
+    @media (max-height: 700px) {
+        .hero {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .search-bar {
+            margin-top: 0.5rem;
+        }
+
+        .drop-area {
+            min-height: 160px;
+        }
+    }
+
+    /* Amélioration de l'expérience utilisateur sur mobile */
+    .search-input-container input:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
+    }
+
+    .btn:active {
+        transform: translateY(1px);
+    }
+
+    /* Optimisations pour les écrans à orientation paysage */
+    @media (orientation: landscape) and (max-height: 500px) {
+        .hero {
+            padding: 1rem;
+        }
+
+        .hero h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-options {
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        .search-input-container {
+            flex: 1;
+        }
+
+        .ordonnance-upload {
+            flex: 1;
+        }
+    }
+
+    /* Améliorations de l'accessibilité */
+    .btn,
+    .nav-link,
+    .search-button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    input,
+    button {
+        touch-action: manipulation;
+    }
+
+    /* Optimisations des performances */
+    .pharmacy-card {
+        will-change: transform;
+        backface-visibility: hidden;
+    }
+
+    .search-results-scroll {
+        will-change: scroll-position;
+    }
+
+    /* Styles pour le mode sombre du système */
+    @media (prefers-color-scheme: dark) {
+        .search-input-container input {
+            background: #f8f9fa;
+        }
+
+        .pharmacy-card {
+            background: #fff;
+        }
+    }
+
+    /* Amélioration de la gestion du texte */
+    .pharmacy-info-content,
+    .medicine-name {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        hyphens: auto;
+    }
+
+    /* Optimisations pour les écrans à faible bande passante */
+    @media (prefers-reduced-data: reduce) {
+        .hero {
+            background: #0D6EFD;
+        }
+    }
+
+    /* Optimisations pour les utilisateurs qui préfèrent moins de mouvement */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+
+    /* Styles des filtres pour mobile */
+    @media (max-width: 767.98px) {
+        .filters-bar {
+            padding: 0;
+            background: none;
+            box-shadow: none;
+        }
+
+        .filter-group {
+            background: white;
+            margin-bottom: 0.5rem;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .filter-group h4 {
+            margin: 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .filter-group h4:after {
+            content: '\f107';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            transition: transform 0.3s ease;
+        }
+
+        .filter-group.active h4:after {
+            transform: rotate(180deg);
+        }
+
+        .filter-options {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 1rem;
+        }
+
+        .filter-group.active .filter-options {
+            max-height: 500px;
+            padding: 1rem;
+        }
+
+        .filter-option {
+            margin-bottom: 0.5rem;
+            padding: 0.75rem;
+            border: 1px solid #e9ecef;
+        }
+
+        .filter-option:last-child {
+            margin-bottom: 0;
+        }
+
+        .filter-actions {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-apply-filters,
+        .btn-reset-filters {
+            flex: 1;
+            margin: 0;
+        }
+
+        /* Ajout d'un padding en bas du conteneur pour éviter que les boutons ne cachent du contenu */
+        .search-results-container {
+            padding-bottom: 80px;
+        }
+
+        /* Style du bouton de filtres mobile */
+        .mobile-filters-toggle {
+            width: 100%;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .mobile-filters-toggle i {
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-filters-toggle.active i {
+            transform: rotate(180deg);
+        }
+
+        .filters-bar {
+            display: none;
+        }
+
+        .filters-bar.show {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    }
 </style>
 @endpush
 
@@ -1642,7 +2355,7 @@
             <div class="filters-bar">
                 <div class="filter-group">
                     <h4>Distance</h4>
-                    <div class="filter-options horizontal">
+                    <div class="filter-options">
                         <label class="filter-option">
                             <input type="radio" name="distance" value="all" checked>
                             <span class="filter-label">Toutes</span>
@@ -1668,7 +2381,7 @@
 
                 <div class="filter-group">
                     <h4>Disponibilité</h4>
-                    <div class="filter-options horizontal">
+                    <div class="filter-options">
                         <label class="filter-option">
                             <input type="radio" name="availability" value="all" checked>
                             <span class="filter-label">Toutes</span>
@@ -1686,7 +2399,7 @@
 
                 <div class="filter-group">
                     <h4>Horaires</h4>
-                    <div class="filter-options horizontal">
+                    <div class="filter-options">
                         <label class="filter-option">
                             <input type="radio" name="hours" value="all" checked>
                             <span class="filter-label">Toutes</span>
@@ -1708,7 +2421,7 @@
 
                 <div class="filter-group">
                     <h4>Services</h4>
-                    <div class="filter-options horizontal">
+                    <div class="filter-options">
                         <label class="filter-option">
                             <input type="radio" name="services" value="all" checked>
                             <span class="filter-label">Toutes</span>
@@ -1775,7 +2488,7 @@
                     <span class="step-number">3</span>
                 </div>
                 <h3>Obtenez</h3>
-                <p>Contactez la pharmacie ou suivez l'itinéraire pour récupérer votre traitement.</p>
+                <p>Contactez la pharmacie, suivez l'itinéraire pour récupérer votre traitement ou faites-vous livrer directement chez vous.</p>
             </div>
         </div>
     </section>
@@ -3085,6 +3798,65 @@
                 whyCards[2].querySelector('.why-icon i').style.color = 'var(--error)';
             }
         }
+
+        // Changer les couleurs pour les variables CSS utilisées dans le JavaScript
+        document.documentElement.style.setProperty('--primary', '#0D6EFD');
+        document.documentElement.style.setProperty('--secondary', '#198754');
+        document.documentElement.style.setProperty('--error', '#DC3545');
+        
+        // Mise à jour des styles d'icône et affichage
+        const icon = dropArea.querySelector('.drop-icon i');
+        if (icon) {
+            icon.style.color = '#0D6EFD'; // Bleu primaire au lieu de var(--primary)
+        }
     });
+
+    // Gestion des filtres sur mobile
+    const filtersBar = document.querySelector('.filters-bar');
+    if (filtersBar) {
+        // Ajouter le bouton de toggle des filtres
+        const toggleButton = document.createElement('button');
+        toggleButton.className = 'mobile-filters-toggle';
+        toggleButton.innerHTML = '<span>Filtres</span><i class="fas fa-filter"></i>';
+        filtersBar.parentNode.insertBefore(toggleButton, filtersBar);
+
+        // Gérer le clic sur le bouton de toggle
+        toggleButton.addEventListener('click', function() {
+            this.classList.toggle('active');
+            filtersBar.classList.toggle('show');
+        });
+
+        // Transformer les groupes de filtres en accordéon sur mobile
+        const filterGroups = document.querySelectorAll('.filter-group');
+        filterGroups.forEach(group => {
+            const header = group.querySelector('h4');
+            if (header) {
+                header.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        const wasActive = group.classList.contains('active');
+                        // Fermer tous les groupes
+                        filterGroups.forEach(g => g.classList.remove('active'));
+                        // Ouvrir le groupe cliqué s'il n'était pas actif
+                        if (!wasActive) {
+                            group.classList.add('active');
+                        }
+                    }
+                });
+            }
+        });
+
+        // Gérer le scroll lors de l'ouverture des filtres
+        function adjustScrollForFixedButtons() {
+            const filterActions = document.querySelector('.filter-actions');
+            if (filterActions) {
+                document.querySelector('.search-results-container').style.paddingBottom = 
+                    (filterActions.offsetHeight + 20) + 'px';
+            }
+        }
+
+        // Ajuster le padding au chargement et au redimensionnement
+        adjustScrollForFixedButtons();
+        window.addEventListener('resize', adjustScrollForFixedButtons);
+    }
 </script>
 @endpush 
